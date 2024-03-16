@@ -1,0 +1,14 @@
+1. Encoder  Baumer Thalheim - EIL580-SC10.5LN.01000.A
+https://www.baumerdistributors.com/baumer-eil580-sc10-5ln-01000-a-incremental-encoder.html
+2. Servor motor -- bỏ
+3. Cảm biến xylanh Mk5343
+https://www.ifm.com/za/en/product/MK5343
+4. Cảm biến xylanh MR0101 
+https://www.ifm.com/de/en/product/MR0101
+5. Cảm biến chiều cao PY-2-F-010-S01M Linear Transducer Gefran Potentionmeter_data
+6. Cảm biến phát hiện vật Keyence PZ-G101P
+https://www.keyence.com.vn/products/sensor/photoelectric/pz-g/models/pz-g101p/
+7. Cảm biến tiệm cận (kim loại)
+Contrinex DW-AS-603-M8
+https://banlinhkien.shop/cam-bien-tiem-can-contrinex-dw-as-603-m8
+8. Cảm biến áp suất Pressure Switch ISE20A-T-01-JA2

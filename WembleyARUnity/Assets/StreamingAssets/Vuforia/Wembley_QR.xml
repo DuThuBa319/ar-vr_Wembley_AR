@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="ECD_QR1" size="1.000000 1.000000" />
+    <ImageTarget name="S12_QR3" size="1.000000 1.000000" />
+    <ImageTarget name="S12_QR2" size="1.000000 1.000000" />
+    <ImageTarget name="S12_QR1" size="1.000000 1.000000" />
+    <ImageTarget name="S11_QR2" size="1.000000 1.000000" />
+    <ImageTarget name="S11_QR1" size="1.000000 1.000000" />
+    <ImageTarget name="S10_QR3" size="1.000000 1.000000" />
+    <ImageTarget name="S10_QR2" size="1.000000 1.000000" />
+    <ImageTarget name="S10_QR1" size="1.000000 1.000000" />
+    <ImageTarget name="S9_QR2" size="1.000000 1.000000" />
+    <ImageTarget name="S9_QR1" size="1.000000 1.000000" />
+    <ImageTarget name="S8_QR2" size="1.000000 1.000000" />
+    <ImageTarget name="S8_QR1" size="1.000000 1.000000" />
+    <ImageTarget name="S7_QR2" size="1.000000 1.000000" />
+    <ImageTarget name="S7_QR1" size="1.000000 1.000000" />
+    <ImageTarget name="S6_QR2" size="1.000000 1.000000" />
+    <ImageTarget name="S6_QR1" size="1.000000 1.000000" />
+    <ImageTarget name="S5_QR2" size="1.000000 1.000000" />
+    <ImageTarget name="S5_QR1" size="1.000000 1.000000" />
+    <ImageTarget name="S4_QR4" size="1.000000 1.000000" />
+    <ImageTarget name="S4_QR3" size="1.000000 1.000000" />
+    <ImageTarget name="S4_QR2" size="1.000000 1.000000" />
+    <ImageTarget name="S4_QR1" size="1.000000 1.000000" />
+    <ImageTarget name="S3_QR2" size="1.000000 1.000000" />
+    <ImageTarget name="S3_QR1" size="1.000000 1.000000" />
+    <ImageTarget name="S2_QR3" size="1.000000 1.000000" />
+    <ImageTarget name="S2_QR2" size="1.000000 1.000000" />
+    <ImageTarget name="S2_QR1" size="1.000000 1.000000" />
+    <ImageTarget name="S1_QR4" size="1.000000 1.000000" />
+    <ImageTarget name="S1_QR3" size="1.000000 1.000000" />
+    <ImageTarget name="S1_QR2" size="1.000000 1.000000" />
+    <ImageTarget name="S1_QR1" size="1.000000 1.000000" />
+  </Tracking>
+</QCARConfig>
