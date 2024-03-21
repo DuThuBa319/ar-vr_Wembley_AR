@@ -2,7 +2,7 @@
 => sửa "com.unity.render-pipelines.universal": "12.1.3" thành "12.1.7",
 - Sau khi thêm vuforia package, nếu gặp lỗi: 
 "Library\PackageCache\com.ptc.vuforia.engine@94809bee5171\Vuforia\Scripts\Internal\RuntimeOpenSourceInitializer.cs(148,40): error CS1061: 'UniversalAdditionalCameraData' does not contain a definition for 'allowHDROutput' and no accessible extension method 'allowHDROutput' accepting a first argument of type 'UniversalAdditionalCameraData' could be found"
-thì bấm vào lỗi đó để vào file RuntimeOpenSourceInitializer sau đó xóa hết (không cần comment) từ dòng 40 đến 151
+thì bấm vào lỗi đó để vào file RuntimeOpenSourceInitializer sau đó xóa hết (không cần comment) từ dòng 140 đến 151
 - Nếu mở cam ko được (1 màu đen) thì vào build setting chuyển platform từ window => android
 - Xem cách tạo process bar:
 https://www.youtube.com/watch?v=BLfNP4Sc_iA
