@@ -9,16 +9,30 @@ public class IOList : MonoBehaviour
     public GameObject inputBtn, outputBtn;
     public Sprite inputBtnOn, inputBtnOff;
     public Sprite outputBtnOn, outputBtnOff;
-
+    public GameObject[] inputCheck = new GameObject[14];
+    public GameObject[] outputCheck = new GameObject[32];
+   
+    
     // Start is called before the first frame update
     void Start()
     {
         inputBtn.GetComponent<Image>().sprite = inputBtnOn;
         outputBtn.GetComponent<Image>().sprite = outputBtnOff;
-
-
         contentInput.SetActive(true);
         contentOutput.SetActive(false);
+    }
+    void Update()
+    {
+        for (var i = 0; i < GlobalVariable.inputStation1.Length; i++)
+        {           
+            if (GlobalVariable.inputStation1[i]) inputCheck[i].SetActive(true);
+            else inputCheck[i].SetActive(false);
+        }
+        for (var i = 0; i < GlobalVariable.outputStation1.Length; i++)
+        {
+            if (GlobalVariable.outputStation1[i]) outputCheck[i].SetActive(true);
+            else outputCheck[i].SetActive(false);
+        }
     }
     public void onClickInputBtn()
     {
