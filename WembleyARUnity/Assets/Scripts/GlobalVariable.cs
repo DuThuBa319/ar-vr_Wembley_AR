@@ -9,6 +9,6 @@ public class GlobalVariable : MonoBehaviour
     public static int encoderPosition = 0;
     //? Station 1
     public static bool[] inputStation1 = new bool[14];
-    public static bool[] outputStation1 = new bool[32];
+    public static bool[] outputStation1 = new bool[33];
 
 }

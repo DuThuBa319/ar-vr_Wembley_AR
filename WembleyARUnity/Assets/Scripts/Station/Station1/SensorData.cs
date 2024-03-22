@@ -5,18 +5,13 @@ using UnityEngine;
 public class SensorData : MonoBehaviour
 {
     public GameObject[] dataCheck = new GameObject[4];
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-       for (var i = 0; i < GlobalVariable.inputStation1.Length; i++)
+        for (var i = 0; i < dataCheck.Length; i++)
         {
-            if (GlobalVariable.inputStation1[i]) dataCheck[i].SetActive(true);
+            if (GlobalVariable.inputStation1[i + 6]) dataCheck[i].SetActive(true);
             else dataCheck[i].SetActive(false);
-        } 
+        }
     }
 }
