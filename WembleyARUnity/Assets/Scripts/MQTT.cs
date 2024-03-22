@@ -63,7 +63,7 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
     }
     protected override void SubscribeTopics()
     {
-        client.Subscribe(new string[] { "Wembley/AR/Enocder Value" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/Encoder Value" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
         client.Subscribe(new string[] { "Wembley/AR/S1/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
         client.Subscribe(new string[] { "Wembley/AR/S1/in/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
         client.Subscribe(new string[] { "Wembley/AR/S1/in/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
@@ -110,7 +110,7 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
         client.Subscribe(new string[] { "Wembley/AR/S1/out/29" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
         client.Subscribe(new string[] { "Wembley/AR/S1/out/30" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
         client.Subscribe(new string[] { "Wembley/AR/S1/out/31" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-
+        client.Subscribe(new string[] { "Wembley/AR/S1/out/32" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
 
     }
     public void Publish_Message()
@@ -155,19 +155,19 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
         string valueKey = topic.Remove(0, 11);
         string msg = System.Text.Encoding.UTF8.GetString(message);
 
-        if (topic.Contains("Enocder Value"))
+        if (topic.Contains("Encoder Value"))
         {
             GlobalVariable.encoderPosition = int.Parse(Data.CreateFromJSON(msg).value);
         }
         else if (valueKey.Contains("S1/in/"))
         {
             int index = int.Parse(valueKey.Remove(0, 6));
-            GlobalVariable.inputStation1[index] = bool.Parse(Data.CreateFromJSON(msg).value);
+            GlobalVariable.inputStation1[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
         }
         else if (valueKey.Contains("S1/out/"))
         {
             int index = int.Parse(valueKey.Remove(0, 7));
-            GlobalVariable.outputStation1[index] = bool.Parse(Data.CreateFromJSON(msg).value);
+            GlobalVariable.outputStation1[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
         }
     }
 
