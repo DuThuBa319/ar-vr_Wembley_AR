@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARInfo>
+<TargetSet version="27.0" toolVersion="10.22.5">
+<ModelTarget name="CAD_STP_100_0703" targetId="b2a7c3856c1342a0b253e9534daa8e18" version="14.0" toolVersion="10.22.5" bbox="-0.060029 -0.009825 -0.008510 0.000029 0.009825 0.008512" previewImage="b2a7c3856c1342a0b253e9534daa8e18_preview.jpg"/>
+
+</TargetSet>
+
+<Assembly name="CAD_STP_100_0703s_assembly" assemblyId="bb5b0d7f237648d28d299d578dbdafd8">
+<Part name="CAD_STP_100_0703" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="GuideView_0000" translation="-0.0299574 -0.00208018 0.0943312" rotation="AD: 1 0.00539089 -0.024455 204.855" image="CAD_STP_100_0703_GuideView_0000.png" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARInfo>
