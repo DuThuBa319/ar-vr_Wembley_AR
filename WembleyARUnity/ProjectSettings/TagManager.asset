@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Arrow
+  - S1_Arrow_1
+  - S1_Arrow_2
+  - S1_Arrow_3
+  - S1_Arrow_4
   layers:
   - Default
   - TransparentFX

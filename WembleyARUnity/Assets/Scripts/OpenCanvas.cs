@@ -6,6 +6,7 @@ public class OpenCanvas : MonoBehaviour
 {
     public GameObject targetCanvas, arrowOpen, arrowClose;
     public GameObject generalPanel;
+    public string tagName;
     bool isShowCanvas = false;
     // Start is called before the first frame update
     void Start()
@@ -21,18 +22,19 @@ public class OpenCanvas : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit) && (hit.collider.CompareTag("Arrow")))
+            if (Physics.Raycast(ray, out hit) && (hit.collider.CompareTag(tagName)))
             {
                 if (isShowCanvas)
                 {
                     onCloseCanvas();
                     isShowCanvas = false;
                 }
-                else {
+                else
+                {
                     onOpenCanvas();
                     isShowCanvas = true;
                 }
-                    
+
             }
 
         }
