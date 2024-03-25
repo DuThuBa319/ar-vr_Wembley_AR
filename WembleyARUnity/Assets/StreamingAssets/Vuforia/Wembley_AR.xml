@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="ecd_qr" size="1.000000 1.000000" />
+    <ImageTarget name="s6_qr" size="1.000000 1.000000" />
+    <ImageTarget name="s12_qr2" size="1.000000 1.000000" />
+    <ImageTarget name="s12_qr1" size="1.000000 1.000000" />
+    <ImageTarget name="s11_qr" size="1.000000 1.000000" />
+    <ImageTarget name="s10_qr2" size="1.000000 1.000000" />
+    <ImageTarget name="s10_qr1" size="1.000000 1.000000" />
+    <ImageTarget name="s9_qr" size="1.000000 1.000000" />
+    <ImageTarget name="s8_qr" size="1.000000 1.000000" />
+    <ImageTarget name="s7_qr" size="1.000000 1.000000" />
+    <ImageTarget name="s5_qr" size="1.000000 1.000000" />
+    <ImageTarget name="s4_qr3" size="1.000000 1.000000" />
+    <ImageTarget name="s4_qr2" size="1.000000 1.000000" />
+    <ImageTarget name="s4_qr1" size="1.000000 1.000000" />
+    <ImageTarget name="s3_qr" size="1.000000 1.000000" />
+    <ImageTarget name="s2_qr2" size="1.000000 1.000000" />
+    <ImageTarget name="s2_qr1" size="1.000000 1.000000" />
+  </Tracking>
+</QCARConfig>
