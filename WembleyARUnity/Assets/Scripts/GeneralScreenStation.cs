@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class GeneralScreenStation : MonoBehaviour
 {
-    public GameObject generalPanel, datasheetPanel, wiringPanel, dataPanel;
+    public GameObject generalPanel, datasheetPanel, plcAdressPanel, dataPanel;
     // Start is called before the first frame update
     void Start()
     {
         generalPanel.SetActive(true);
         datasheetPanel.SetActive(false);
-        wiringPanel.SetActive(false);
+        plcAdressPanel.SetActive(false);
         dataPanel.SetActive(false);
     }
     public void navigateToDatasheetPanel()
@@ -19,10 +19,10 @@ public class GeneralScreenStation : MonoBehaviour
         generalPanel.SetActive(false);
         datasheetPanel.SetActive(true);
     }
-    public void navigateToWiringPanel()
+    public void navigateToPlcAdressPanel()
     {
         generalPanel.SetActive(false);
-        wiringPanel.SetActive(true);
+        plcAdressPanel.SetActive(true);
     }
     public void navigateToDataPanel()
     {
@@ -34,7 +34,7 @@ public class GeneralScreenStation : MonoBehaviour
     {
         generalPanel.SetActive(true);
         datasheetPanel.SetActive(false);
-        wiringPanel.SetActive(false);
+        plcAdressPanel.SetActive(false);
         dataPanel.SetActive(false);
     }
 }
