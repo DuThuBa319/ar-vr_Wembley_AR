@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class DatasheetFunction : MonoBehaviour
 {
-    public GameObject contentMR0101, contentMK5343, contentPZG101P;
-    
+    public GameObject contentMR0101, contentMK5343, contentPZG101P, datasheetUI;
+
     // Start is called before the first frame update
     void Start()
     {
+        datasheetUI.SetActive(true);
         contentMK5343.SetActive(false);
         contentMR0101.SetActive(false);
+        contentPZG101P.SetActive(false);
     }
 
     public void onValueChange(int value)
