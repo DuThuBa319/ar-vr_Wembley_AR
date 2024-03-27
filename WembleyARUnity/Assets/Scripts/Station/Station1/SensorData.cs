@@ -9,9 +9,9 @@ public class SensorData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (var i = initIndex; i < dataCheck.Length; i++)
+        for (var i = 0; i < 4; i++)
         {
-            if (GlobalVariable.inputStation1[i]) dataCheck[i].SetActive(true);
+            if (GlobalVariable.inputStation1[i + initIndex]) dataCheck[i].SetActive(true);
             else dataCheck[i].SetActive(false);
         }
     }
