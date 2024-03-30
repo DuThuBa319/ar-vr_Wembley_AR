@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class GeneralScreenSensor : MonoBehaviour
 {
-    public GameObject generalPanel, datasheetPanel, wiringPanel, dataPanel;
+    public GameObject generalPanel, datasheetPanel, wiringPanel, dataPanel,generalCanvas;
     // Start is called before the first frame update
     void Start()
-    {
+    {generalCanvas.SetActive(true); 
         generalPanel.SetActive(true);
         datasheetPanel.SetActive(false);
         wiringPanel.SetActive(false);
