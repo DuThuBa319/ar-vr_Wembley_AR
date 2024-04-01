@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class GeneralScreenStation : MonoBehaviour
 {
-    public GameObject generalPanel, datasheetPanel, plcAdressPanel, dataPanel;
+    public GameObject generalPanel, datasheetPanel, plcAdressPanel, dataPanel, generalCanvas;
     // Start is called before the first frame update
     void Start()
-    {
+    {    generalCanvas.SetActive(true); 
         generalPanel.SetActive(true);
         datasheetPanel.SetActive(false);
         plcAdressPanel.SetActive(false);

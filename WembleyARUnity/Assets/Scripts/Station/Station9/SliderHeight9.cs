@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 using UnityEngine.UI;
 using TMPro;
 
-public class SliderTest : MonoBehaviour
+public class SliderHeight9 : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject highLimit;
@@ -62,7 +62,7 @@ public class SliderTest : MonoBehaviour
             //?=> do thanh slider là chiều dọc => PosX giữ nguyên, tìm PosY
             float offsetTextPosY = barHeight * (offsetValue - minSlider) / (maxSlider - minSlider);
             offsetText.GetComponent<RectTransform>().anchoredPosition = new Vector3(offsetTextPosX, offsetTextPosY, 0);
-            offsetText.SetActive(true);
+            
             minText.SetActive(true);
         }
         else if (minValue > offsetValue)
@@ -71,7 +71,7 @@ public class SliderTest : MonoBehaviour
             slider.GetComponent<Slider>().minValue = minSlider;
             float minTextPosY = barHeight * (minValue - minSlider) / (maxSlider - minSlider);
             minText.GetComponent<RectTransform>().anchoredPosition = new Vector3(minTextPosX, minTextPosY, 0);
-            offsetText.SetActive(true);
+            
             minText.SetActive(true);
         }
         else if (minValue == offsetValue)

@@ -63,6 +63,7 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
     }
     protected override void SubscribeTopics()
     {
+        //! S1
         client.Subscribe(new string[] { "Wembley/AR/Encoder Value" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
         client.Subscribe(new string[] { "Wembley/AR/S1/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
         client.Subscribe(new string[] { "Wembley/AR/S1/in/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
@@ -111,6 +112,74 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
         client.Subscribe(new string[] { "Wembley/AR/S1/out/30" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
         client.Subscribe(new string[] { "Wembley/AR/S1/out/31" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
         client.Subscribe(new string[] { "Wembley/AR/S1/out/32" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        //! S3
+        client.Subscribe(new string[] { "Wembley/AR/S3/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/in/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/in/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/in/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/in/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/in/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/in/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/in/07" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/in/08" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/out/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/out/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/out/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/out/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/out/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/out/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/out/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/out/07" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/out/08" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S3/out/09" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        //! S5
+        client.Subscribe(new string[] { "Wembley/AR/S5/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S5/in/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S5/in/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S5/in/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S5/in/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S5/out/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S5/out/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        //! S6
+        client.Subscribe(new string[] { "Wembley/AR/S6/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S6/in/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S6/in/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S6/in/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S6/in/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S6/in/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S6/out/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S6/out/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S6/out/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S6/out/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S6/out/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S6/out/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        //! S7
+        client.Subscribe(new string[] { "Wembley/AR/S7/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S7/in/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S7/in/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S7/in/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S7/in/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S7/in/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S7/out/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S7/out/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S7/out/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S7/out/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S7/out/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S7/out/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        //! S10
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/07" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/out/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/out/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/out/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/out/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
 
     }
     public void Publish_Message()
@@ -159,6 +228,7 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
         {
             GlobalVariable.encoderPosition = int.Parse(Data.CreateFromJSON(msg).value);
         }
+        //! S1
         else if (valueKey.Contains("S1/in/"))
         {
             int index = int.Parse(valueKey.Remove(0, 6));
@@ -168,6 +238,62 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
         {
             int index = int.Parse(valueKey.Remove(0, 7));
             GlobalVariable.outputStation1[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+        }
+        //! S3
+        else if (valueKey.Contains("S3/in/"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 6));
+            GlobalVariable.inputStation3[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+        }
+        else if (valueKey.Contains("S3/out/"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 7));
+            GlobalVariable.outputStation3[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+        }
+        //! S5
+        else if (valueKey.Contains("S5/in/"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 6));
+            GlobalVariable.inputStation5[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+        }
+        else if (valueKey.Contains("S5/out/"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 7));
+            GlobalVariable.outputStation5[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+        }
+        //! S6
+        else if (valueKey.Contains("S6/in/"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 6));
+            GlobalVariable.inputStation6[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+        }
+        else if (valueKey.Contains("S6/out/"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 7));
+            GlobalVariable.outputStation6[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+        }
+        //! S7
+        else if (valueKey.Contains("S7/in/"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 6));
+            GlobalVariable.inputStation7[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+        }
+        else if (valueKey.Contains("S7/out/"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 7));
+            GlobalVariable.outputStation7[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+        }
+        //! S10
+        //! S7
+        else if (valueKey.Contains("S10/in/"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 7));
+            GlobalVariable.inputStation10[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+        }
+        else if (valueKey.Contains("S10/out/"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 8));
+            GlobalVariable.outputStation10[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
         }
     }
 

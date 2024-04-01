@@ -9,6 +9,13 @@ TagManager:
   - S1_Arrow_2
   - S1_Arrow_3
   - S1_Arrow_4
+  - S3_Arrow
+  - S5_Arrow
+  - S6_Arrow
+  - S7_Arrow
+  - S8_Arrow
+  - S9_Arrow
+  - S10_Arrow
   layers:
   - Default
   - TransparentFX
