@@ -23,4 +23,7 @@ public class GlobalVariable : MonoBehaviour
     //? Station 7
     public static bool[] inputStation7 = new bool[7];
     public static bool[] outputStation7 = new bool[6];
+      //? Station 10
+    public static bool[] inputStation10 = new bool[8];
+    public static bool[] outputStation10 = new bool[4];
 }

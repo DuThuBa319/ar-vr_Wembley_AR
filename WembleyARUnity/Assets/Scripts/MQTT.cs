@@ -165,7 +165,22 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
         client.Subscribe(new string[] { "Wembley/AR/S7/out/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
         client.Subscribe(new string[] { "Wembley/AR/S7/out/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
         client.Subscribe(new string[] { "Wembley/AR/S7/out/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "Wembley/AR/S7/out/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S7/out/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });   
+       //! S10
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/in/07" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/out/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/out/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/out/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        client.Subscribe(new string[] { "Wembley/AR/S10/out/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+
     }
     public void Publish_Message()
     {
@@ -267,6 +282,18 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
         {
             int index = int.Parse(valueKey.Remove(0, 7));
             GlobalVariable.outputStation7[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+        }
+        //! S10
+          //! S7
+             else if (valueKey.Contains("S10/in/"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 6));
+            GlobalVariable.inputStation10[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+        }
+        else if (valueKey.Contains("S10/out/"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 7));
+            GlobalVariable.outputStation10[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
         }
     }
 
