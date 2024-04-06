@@ -8,37 +8,83 @@ using TMPro;
 public class NotificationTest : MonoBehaviour
 {
 
-    private float x = 0, y = 0;
-    public TMP_Text xTxt, yTxt;
+
+
     // Start is called before the first frame update
     async void Start()
     {
+
+        ApplicationChrome.statusBarState = ApplicationChrome.States.Visible;
+        ApplicationChrome.statusBarColor = 0x00000000;//transparent
+        ApplicationChrome.navigationBarState = ApplicationChrome.States.Hidden;
+        //Screen.fullScreen = true;
+
+        // List<string> topics = new List<string> { "Wembley/HerapinCap/IE-F2-HCA01/S1/out" };
+        // HubConnection hubConnection = new HubConnectionBuilder().WithUrl(GlobalVariable.url).Build();
+        // try
+        // {
+        //     await hubConnection.StartAsync();
+        //     Debug.Log("connected");
+        //     await hubConnection.InvokeAsync("UpdateTopics", topics);
+        //     Debug.Log("subscribed");
+        //     hubConnection.On<string>("S1Output", (str) =>
+        //     {
+
+        //         //DataSignalR data = JsonUtility.FromJson<DataSignalR>(str);
+        //         Debug.Log(str);
+        //         // if (data.TagId.Contains("productCount"))
+        //         // {
+        //         //     Debug.Log(data.TagValue);
+        //         // }
+        //     });
+        // }
+        // catch (Exception e)
+        // {
+        //     Debug.Log(e);
+        //     throw;
+        // }
+        string topic = "Wembley/HerapinCap/IE-F2-HCA01/";
         GlobalVariable.hubConnection = new HubConnectionBuilder().WithUrl(GlobalVariable.url).Build();
-        //  await hubConnection.InvokeAsync("UpdateTopic",url);
-        // Hiện thông báo đã kết nối => test xem đã kết nối chưa
-        // hubConnection.On<string>("OnMessage", (str) => { Debug.Log(str); });
-        // Nhận 2 số từ Hub => biết cách nhận dữ liệu 
-        GlobalVariable.hubConnection.On<string>("TagChanged", (str) =>
+        try
+        {
+
+            GlobalVariable.hubConnection.On<string>(topic + "S1/in/00", (str) =>
             {
 
                 DataSignalR data = JsonUtility.FromJson<DataSignalR>(str);
-                //Debug.Log(data);
-                if (data.TagId.Contains("productCount"))
-                {
-                    Debug.Log(data.TagValue);
-                }
+                Debug.Log(str);
+                // if (data.TagId.Contains("productCount"))
+                // {
+                //     Debug.Log(data.TagValue);
+                // }
             });
-
-        try
-        {
             await GlobalVariable.hubConnection.StartAsync();
             Debug.Log("connected");
+
         }
         catch (Exception e)
         {
             Debug.Log(e);
             throw;
         }
+
+        // Hiện thông báo đã kết nối => test xem đã kết nối chưa
+        // hubConnection.On<string>("OnMessage", (str) => { Debug.Log(str); });
+        // Nhận 2 số từ Hub => biết cách nhận dữ liệu 
+        // hubConnection.On<string>("S1Output", (str) =>
+        //     {
+
+        //         //DataSignalR data = JsonUtility.FromJson<DataSignalR>(str);
+        //         Debug.Log(str);
+        //         // if (data.TagId.Contains("productCount"))
+        //         // {
+        //         //     Debug.Log(data.TagValue);
+        //         // }
+        //     });
+
+
+
+
     }
 
     // Update is called once per frame
@@ -46,10 +92,9 @@ public class NotificationTest : MonoBehaviour
     {
 
     }
-    public void onClickButton()
+    async void OnDestroy()
     {
-        // gửi 1 số đi để xử lý => biết cách gửi dữ liệu
-        //  data= hubConnection.InvokeAsync("SendNumber");
-        Debug.Log("Đã gửi số");
+        if (GlobalVariable.hubConnection != null)
+            await GlobalVariable.hubConnection.StopAsync();
     }
 }

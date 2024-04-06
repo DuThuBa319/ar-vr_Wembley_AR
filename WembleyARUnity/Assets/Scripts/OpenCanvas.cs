@@ -5,14 +5,14 @@ using UnityEngine;
 public class OpenCanvas : MonoBehaviour
 {
     public GameObject targetCanvas, arrowOpen, arrowClose;
-    public GameObject generalPanel;
+    public GameObject homeScreen;
     public string tagName;
     bool isShowCanvas = false;
     // Start is called before the first frame update
     void Start()
     {
         targetCanvas.SetActive(false);
-        generalPanel.SetActive(true);
+        homeScreen.SetActive(true);
         arrowOpen.SetActive(true);
         arrowClose.SetActive(false);
     }
