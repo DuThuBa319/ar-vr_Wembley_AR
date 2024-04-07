@@ -9,8 +9,8 @@ public class IOListS7 : MonoBehaviour
     public GameObject inputBtn, outputBtn;
     public Sprite inputBtnOn, inputBtnOff;
     public Sprite outputBtnOn, outputBtnOff;
-    public GameObject[] inputCheck = new GameObject[7];
-    public GameObject[] outputCheck = new GameObject[6];
+    public GameObject[] inputCheck;
+    public GameObject[] outputCheck;
 
 
     // Start is called before the first frame update

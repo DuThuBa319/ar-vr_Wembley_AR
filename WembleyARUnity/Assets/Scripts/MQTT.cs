@@ -63,6 +63,7 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
     }
     protected override void SubscribeTopics()
     {
+
         //! S1
         client.Subscribe(new string[] { "Wembley/HerapinCap/IE-F2-HCA01/Encoder Value" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
         client.Subscribe(new string[] { "Wembley/HerapinCap/IE-F2-HCA01/S1/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });

@@ -15,12 +15,12 @@ public class Conveyor : MonoBehaviour
     void Update()
     {
 
-        if (GlobalVariable.outputStation1[32])
+        if (GlobalVariable.outputStation1[12])
         {
             frameOn.SetActive(true);
             frameOff.SetActive(false);
         }
-        if (GlobalVariable.outputStation1[32] == false)
+        if (GlobalVariable.outputStation1[12] == false)
         {
             frameOn.SetActive(false);
             frameOff.SetActive(true);

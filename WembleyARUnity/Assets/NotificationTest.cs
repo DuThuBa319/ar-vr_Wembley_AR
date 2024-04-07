@@ -14,9 +14,7 @@ public class NotificationTest : MonoBehaviour
     async void Start()
     {
 
-        ApplicationChrome.statusBarState = ApplicationChrome.States.Visible;
-        ApplicationChrome.statusBarColor = 0x00000000;//transparent
-        ApplicationChrome.navigationBarState = ApplicationChrome.States.Hidden;
+
         //Screen.fullScreen = true;
 
         // List<string> topics = new List<string> { "Wembley/HerapinCap/IE-F2-HCA01/S1/out" };
