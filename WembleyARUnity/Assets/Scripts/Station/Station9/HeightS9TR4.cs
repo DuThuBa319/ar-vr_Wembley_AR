@@ -14,7 +14,8 @@ public class HeightS9TR4 : MonoBehaviour
     public TMP_Text minValueText, maxValueText, currentValueText, offsetValueText, measuredValueText;
     public GameObject valueBar;
     Image valueBarImg;
-    float barHeight = 0, offsetHeight, minHeight, maxHeight;
+    float barHeight = 0;
+    double offsetHeight, minHeight, maxHeight;
 
 
     void Start()
@@ -40,11 +41,11 @@ public class HeightS9TR4 : MonoBehaviour
     }
     void Update()
     {
-        float measuredHeight = GlobalVariable.S9_measured_4;
-        float currentHeight = GlobalVariable.S9_current_4;
+        double measuredHeight = GlobalVariable.S9_measured_4;
+        double currentHeight = GlobalVariable.S9_current_4;
         currentValueText.text = currentHeight.ToString("F2");
         measuredValueText.text = measuredHeight.ToString("F2");
-        slider.GetComponent<Slider>().value = measuredHeight;
+        slider.GetComponent<Slider>().value = (float)measuredHeight;
         if (measuredHeight <= maxHeight && measuredHeight >= minHeight)
         {
             valueBarImg.color = Color.green;
@@ -54,7 +55,7 @@ public class HeightS9TR4 : MonoBehaviour
             valueBarImg.color = Color.red;
         }
     }
-    void SetUpSlider(GameObject slider, float offsetValue, float minValue, float maxValue, GameObject minText, GameObject maxText, TMP_Text offsetValueText, TMP_Text minValueText, TMP_Text maxValueText)
+    void SetUpSlider(GameObject slider, double offsetValue, double minValue, double maxValue, GameObject minText, GameObject maxText, TMP_Text offsetValueText, TMP_Text minValueText, TMP_Text maxValueText)
     {
         //! lấy maxSlider là giá trị max của Slider
         float maxSlider = slider.GetComponent<Slider>().maxValue;
@@ -70,29 +71,29 @@ public class HeightS9TR4 : MonoBehaviour
         float minSlider = 21.0f;
         if (minValue < offsetValue)
         {
-            minSlider = minValue;
+            minSlider = (float)minValue;
             slider.GetComponent<Slider>().minValue = minSlider;
             minText.SetActive(true);
         }
         else if (minValue > offsetValue)
         {
-            minSlider = offsetValue;
+            minSlider = (float)offsetValue;
             slider.GetComponent<Slider>().minValue = minSlider;
             //? minValue sẽ là offset => chuẩn hóa (normalize) để xác định vị trí của minText 
             //?=> do thanh slider là chiều dọc => PosX giữ nguyên, tìm PosY
-            float minTextPosY = barHeight * (minValue - minSlider) / (maxSlider - minSlider);
+            float minTextPosY = barHeight * ((float)minValue - minSlider) / (maxSlider - minSlider);
             minText.GetComponent<RectTransform>().anchoredPosition = new Vector3(minTextPosX, minTextPosY, 0);
 
             minText.SetActive(true);
         }
         else if (minValue == offsetValue)
         {
-            minSlider = minValue;
+            minSlider = (float)minValue;
             slider.GetComponent<Slider>().minValue = minSlider;
             minText.SetActive(true);
         }
         //? tìm vị trí cho maxText
-        float maxTextPosY = barHeight * (maxValue - minSlider) / (maxSlider - minSlider);
+        float maxTextPosY = barHeight * ((float)maxValue - minSlider) / (maxSlider - minSlider);
         maxText.GetComponent<RectTransform>().anchoredPosition = new Vector3(maxTextPosX, maxTextPosY, 0);
         maxText.SetActive(true);
     }

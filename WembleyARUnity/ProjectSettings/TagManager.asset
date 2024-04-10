@@ -16,6 +16,29 @@ TagManager:
   - S8_Arrow
   - S9_Arrow
   - S10_Arrow
+  - S8_pop
+  - S9_pop
+  - S7_pop
+  - S6_pop
+  - S5_pop_general
+  - S5_pop_station
+  - S5_pop_sensor
+  - S5_pop_wiring
+  - S1_sensor1_pop
+  - S4_Arrow_3
+  - S4_Arrow_1
+  - S4_Arrow_2
+  - S2_Arrow_1
+  - S2_Arrow_2
+  - S11_Arrow
+  - S12_Arrow_1
+  - S12_Arrow_2
+  - S12_sensor1_pop
+  - S2_sensor1_pop
+  - S4_sensor1_pop
+  - S4_sensor2_pop
+  - S1_sensor2_pop
+  - S1_sensor3_pop
   layers:
   - Default
   - TransparentFX

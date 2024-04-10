@@ -5,7 +5,7 @@ using UnityEngine;
 public class SensorDataS3 : MonoBehaviour
 {
     public int initIndex;
-    public GameObject[] dataCheck = new GameObject[4];
+    public GameObject[] dataCheck;
     // Update is called once per frame
     void Update()
     {
