@@ -39,6 +39,7 @@ TagManager:
   - S4_sensor2_pop
   - S1_sensor2_pop
   - S1_sensor3_pop
+  - Mqtt
   layers:
   - Default
   - TransparentFX

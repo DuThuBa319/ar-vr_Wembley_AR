@@ -23,8 +23,9 @@ public class NotificationTest : MonoBehaviour
         // {
         //     await hubConnection.StartAsync();
         //     Debug.Log("connected");
-        //     await hubConnection.InvokeAsync("UpdateTopics", topics);
+        //    data = await hubConnection.InvokeAsync("UpdateTopics", topics);
         //     Debug.Log("subscribed");
+
         //     hubConnection.On<string>("S1Output", (str) =>
         //     {
 
@@ -84,6 +85,8 @@ public class NotificationTest : MonoBehaviour
 
 
     }
+
+
 
     // Update is called once per frame
     void Update()

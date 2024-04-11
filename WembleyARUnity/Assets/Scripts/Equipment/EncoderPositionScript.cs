@@ -6,6 +6,7 @@ using TMPro;
 public class EncoderPositionScript : MonoBehaviour
 {
     public TMP_Text encoderPositionText;
+
     void Update()
     {
         encoderPositionText.text = GlobalVariable.encoderPosition.ToString();
