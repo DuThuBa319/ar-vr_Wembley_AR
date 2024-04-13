@@ -6,7 +6,6 @@ public class MQTT_Data_Station_10 : MonoBehaviour
 {
     MQTT mqtt;
     List<string> topicStation10 = new List<string> {
-
           "HCM/IE-F2-HCA01/Metric/S10/in/00" ,
          "HCM/IE-F2-HCA01/Metric/S10/in/01" ,
          "HCM/IE-F2-HCA01/Metric/S10/in/02" ,
