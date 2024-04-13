@@ -28,11 +28,15 @@ public class MQTT_Data_Station_10 : MonoBehaviour
          "HCM/IE-F2-HCA01/Metric/S10/out/09" ,
          "HCM/IE-F2-HCA01/Metric/S10/out/10" ,
          "HCM/IE-F2-HCA01/Metric/S10/out/11" , };
-    void Start()
+    void Awake()
     {
         mqtt = GameObject.FindWithTag("Mqtt").GetComponent<MQTT>();
+    }
+    void OnEnable()
+    {
         mqtt.SubscribeTopic(topicStation10);
     }
+
     void OnDisable()
     {
         mqtt.UnsubscribeTopic(topicStation10);

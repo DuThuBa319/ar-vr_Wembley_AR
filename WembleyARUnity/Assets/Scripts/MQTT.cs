@@ -361,7 +361,7 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
         msg = msg.TrimStart("[").TrimEnd("]");
 
         if (topic.Contains("Encoder Value"))
-        { 
+        {
             GlobalVariable.encoderPosition = int.Parse(Data.CreateFromJSON(msg).value);
 
         }
@@ -451,6 +451,7 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
             if (valueKey.Contains("MAXIMUM_HEIGHT_VALUE_TR1"))
             {
                 GlobalVariable.S8_max_1 = HeightData.CreateFromJSON(msg).value;
+                Debug.Log(GlobalVariable.S8_max_1);
 
             }
             else if (valueKey.Contains("MINIMUN_HEIGHT_VALUE_TR1"))
@@ -465,6 +466,7 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
             else if (valueKey.Contains("TOTAL_HEIGHT_TR1"))
             {
                 GlobalVariable.S8_measured_1 = HeightData.CreateFromJSON(msg).value;
+                Debug.Log(GlobalVariable.S8_measured_1);
 
             }
             else if (valueKey.Contains("OFF_SET_TR1"))

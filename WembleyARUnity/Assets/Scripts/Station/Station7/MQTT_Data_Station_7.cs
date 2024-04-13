@@ -20,11 +20,15 @@ public class MQTT_Data_Station_7 : MonoBehaviour
        "HCM/IE-F2-HCA01/Metric/S7/out/04" ,
        "HCM/IE-F2-HCA01/Metric/S7/out/05" ,
        "HCM/IE-F2-HCA01/Metric/S7/out/06" , };
-    void Start()
+    void Awake()
     {
         mqtt = GameObject.FindWithTag("Mqtt").GetComponent<MQTT>();
+    }
+    void OnEnable()
+    {
         mqtt.SubscribeTopic(topicStation7);
     }
+
     void OnDisable()
     {
         mqtt.UnsubscribeTopic(topicStation7);

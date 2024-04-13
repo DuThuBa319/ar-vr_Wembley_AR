@@ -5,6 +5,7 @@ using UnityEngine;
 public class WiringPanelNavigation : MonoBehaviour
 {
     public GameObject wiringPanel, datasheetPanel;
+    //! riêng Station3,5 có sự khác biệt
     void Start()
     {
 

@@ -25,7 +25,7 @@ public class TaskCycle6 : MonoBehaviour
     void Update()
     {
         currentValue = GlobalVariable.encoderPosition;
-        if ((currentValue >= 990) || (currentValue >= 0 && currentValue < 200))
+        if ((currentValue > 990) || (currentValue >= 0 && currentValue < 200))
         {
             sliderBar.GetComponent<Slider>().value = minValue;
             frameOn.SetActive(false);

@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Vuforia;
 
-public class ClickOpenCanvas : MonoBehaviour
+public class OpenStationCanvas : MonoBehaviour
 {
     public GameObject targetCanvas, clickBtn;
     public GameObject generalPanel;
     public string tagName;
+    public GameObject monitorCanvas;
+    public Camera ARCamera;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +24,7 @@ public class ClickOpenCanvas : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit) && (hit.collider.CompareTag(tagName)))
+            if (Physics.Raycast(ray, out hit) && hit.collider.CompareTag(tagName))
             {
                 onOpenCanvas();
             }
@@ -34,10 +37,14 @@ public class ClickOpenCanvas : MonoBehaviour
     {
         targetCanvas.SetActive(true);
         clickBtn.SetActive(false);
+        monitorCanvas.SetActive(false);
+        ARCamera.GetComponent<VuforiaBehaviour>().enabled = false;
     }
     public void onCloseCanvas()
     {
         targetCanvas.SetActive(false);
         clickBtn.SetActive(true);
+        monitorCanvas.SetActive(true);
+        ARCamera.GetComponent<VuforiaBehaviour>().enabled = true;
     }
 }

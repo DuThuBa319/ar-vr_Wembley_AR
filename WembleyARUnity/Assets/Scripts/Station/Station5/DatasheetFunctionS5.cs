@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class DatasheetFunctionS5 : MonoBehaviour
 {
-    public GameObject contentMK5343, contentDWAS603M8;
-    
+    public GameObject contentMK5343, contentDWAS603M8, datasheetUI;
+
     // Start is called before the first frame update
     void Start()
     {
+        datasheetUI.SetActive(true);
         contentMK5343.SetActive(false);
         contentDWAS603M8.SetActive(false);
     }
@@ -22,7 +23,7 @@ public class DatasheetFunctionS5 : MonoBehaviour
             case 1:
                 contentMK5343.SetActive(true);
                 break;
-          
+
             case 2:
                 contentDWAS603M8.SetActive(true);
                 break;
