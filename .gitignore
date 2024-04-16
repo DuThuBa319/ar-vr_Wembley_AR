@@ -2,17 +2,17 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
-/WembleyARUnity//[Ll]ibrary/
-/WembleyARUnity//[Tt]emp/
-/WembleyARUnity//[Oo]bj/
-/WembleyARUnity//[Bb]uild/
-/WembleyARUnity//[Bb]uilds/
-/WembleyARUnity//[Ll]ogs/
-/WembleyARUnity//[Uu]ser[Ss]ettings/
+/WembleyAR//[Ll]ibrary/
+/WembleyAR//[Tt]emp/
+/WembleyAR//[Oo]bj/
+/WembleyAR//[Bb]uild/
+/WembleyAR//[Bb]uilds/
+/WembleyAR//[Ll]ogs/
+/WembleyAR//[Uu]ser[Ss]ettings/
 /unitypackage/
 /WembleyAR_BurstDebugInformation_DoNotShip/
 /WembleyAR_BackUpThisFolder_ButDontShipItWithYourGame/
-
+/WembleyAR//[Aa]ssets/[Ff]irebase/
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/

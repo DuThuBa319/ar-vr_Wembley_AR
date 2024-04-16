@@ -10,3 +10,9 @@ https://www.youtube.com/watch?v=BLfNP4Sc_iA
 https://medium.com/medialesson/using-signalr-client-in-unity-uwp-apps-eadab5948bb4
 - Cách sử dụng, test
 https://www.youtube.com/watch?v=Ztc5ZYJ4Tho&t=814s
+- Onesignal: https://documentation.onesignal.com/docs/unity-sdk-setup hoặc làm theo video hướng dẫn https://www.youtube.com/watch?v=_Hur7OmrIfY
+B1: Tạo project firebase => bấm biểu tượng unity để đăng ký => xuất các file vào asset theo hướng dẫn 
+B2: Configure your OneSignal App and Platform => appId: 96b6cb31-9a02-4505-9afd-c89262e08349
+B3:  Add SDK by Unity Asset Store => Android setup
+B4: Initialization
+=> test

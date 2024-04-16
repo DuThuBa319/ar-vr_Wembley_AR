@@ -51,7 +51,8 @@ def generate_data(data_name, data_value):
 #-------------------------------------------------------------
 #topic_standard = 'Wembley/HerapinCap/IE-F2-HCA01/'
 #topic_standard = 'HCM/HC001/Metric/'
-topic_standard = 'HCM/IE-F2-HCA01/Metric/'
+topic_standard = 'Wembley/HerapinCap/IE-F2-HCA01/'
+#topic_standard ='HCM/IE-F2-HCA01/Metric/'
 # topic_standard = 'Test/HC001/Metric/'
 
 # --------------------------- Setup MQTT -------------------------------------
