@@ -13,6 +13,8 @@
 /WembleyAR_BurstDebugInformation_DoNotShip/
 /WembleyAR_BackUpThisFolder_ButDontShipItWithYourGame/
 /WembleyAR//[Aa]ssets/[Ff]irebase/
+/Source//google-services.json
+/Source//wembleyar-1295b-firebase-adminsdk-hzhxw-5fe19193a9.json
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/

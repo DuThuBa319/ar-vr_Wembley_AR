@@ -11,6 +11,10 @@ public class GlobalVariable : MonoBehaviour
     public static string url = "https://wembleyscada.azurewebsites.net/NotificationHub";
     public static string basedTopic = "Wembley/HerapinCap/IE-F2-HCA01";
     public static List<string> subscribedTopics = new List<string>();
+    public static bool networkConnected = false;
+    public static bool serverConnected = false;
+    public static bool isConnecting = false;
+    public static bool errorServerConnected = false;
     public static int encoderPosition = 0;
     //? Station 1
     public static bool[] inputStation1 = new bool[14];
@@ -71,6 +75,27 @@ public class GlobalVariable : MonoBehaviour
     //? Station 12
     public static bool[] inputStation12 = new bool[4];
     public static bool[] outputStation12 = new bool[2];
+
+    //monitor
+    public static int productCount = 0;
+    public static int goodProductCount = 0;
+    public static int badProductCount = 0;
+    public static string operationTime = "00:00:00";
+    public static double effective = 0;
+    public static int[] goodProductCountTR = new int[4];
+    public static int[] badProductCountTR = new int[4];
+    public static int[] productCountTR = new int[4];
+    public static int[] RejCountS1TR = new int[4];
+    public static int[] RejCountS3TR = new int[4];
+    public static int[] RejCountS5TR = new int[4];
+    public static int[] RejCountS89TR = new int[4];
+
+    public static int[] RejCountS10TR = new int[4];
+
+    //? Error
+    public static List<ErrorInfor> errorInfors = new List<ErrorInfor>();
+
+
 }
 [System.Serializable]
 public class DataSignalR
@@ -79,7 +104,7 @@ public class DataSignalR
     public string LineId;
     public string TagId;
     public string TagValue;
-    public string TimeStamp;
+    public DateTime TimeStamp;
 }
 [System.Serializable]
 public class DoubleTypeDataModel
@@ -136,4 +161,10 @@ public class Mfc
 public class Wrapper
 {
     public ManufacturingInfo[] manufacturingData;
+}
+public class ErrorInfor
+{
+    public string errorName;
+    public string time;
+
 }

@@ -5,6 +5,9 @@ using System.Net;
 using UnityEngine;
 using Newtonsoft.Json;
 using TMPro;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System;
 
 public class ManufacturingInfoScript : MonoBehaviour
 {
@@ -12,49 +15,102 @@ public class ManufacturingInfoScript : MonoBehaviour
     public TMP_Text productNameText, referenceIdText, lotCodeText, lotSizeText, employeeText;
     private ManufacturingInfo[] manufacturingData;
     public GameObject loadingAnimator;
-    float timer = 0;
+
     void Start()
     {
         loadingAnimator.SetActive(false);
-        StartCoroutine(GetManufacturingInfoData());
 
     }
-    public IEnumerator GetManufacturingInfoData()
+    //? The error you're seeing is because void cannot be awaited. The async keyword enables the await keyword in that method. When you await a method, it must return a Task or Task<T>.
+    //? In your case, you should change async Task<void> to async Task in the UpdateManufacturingInforData method
+    async void OnEnable()
+    {
+        await UpdateManufacturingInforData();
+    }
+    public async Task UpdateManufacturingInforData()
+    {
+        manufacturingData = await GetManufacturingInfoData();
+        if (manufacturingData != null && manufacturingData.Length > 0)
+        {
+            SetManufacturingInfoData(manufacturingData[0]);
+        }
+    }
+
+    public async Task<ManufacturingInfo[]> GetManufacturingInfoData()
+    {
+        OpenLoadingIndicator();
+
+        try
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string jsonResponse = await client.GetStringAsync(url);
+                manufacturingData = JsonConvert.DeserializeObject<ManufacturingInfo[]>(jsonResponse);
+                if (manufacturingData == null || manufacturingData.Length == 0)
+                {
+                    Debug.LogError("Failed to parse JSON data or no data found.");
+
+
+                }
+                return manufacturingData;
+
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error: " + e.Message);
+        }
+        finally
+        {
+            CloseLoadingIndicator();
+        }
+        return null;
+    }
+
+    //? có nhiều cách get nhưng cách này hay nhất
+    // public async Task<string> FetchDataAsync(string url)
+    // {
+    //     using (HttpClient client = new HttpClient())
+    //     {
+    //         string jsonResponse = await client.GetStringAsync(url);
+    //         return jsonResponse;
+    //     }
+    // }
+    void OpenLoadingIndicator()
     {
         loadingAnimator.SetActive(true);
         loadingAnimator.GetComponent<Animator>().Play("Loading", 0, 0);
         loadingAnimator.GetComponent<Animator>().SetBool("Loading", true);
-        yield return new WaitForSeconds(0.5f);
-        try
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            StreamReader reader = new StreamReader(response.GetResponseStream());
-            string jsonResponse = reader.ReadToEnd();
-            //The Wrapper class is used to wrap the array of ManufacturingInfo objects because JsonUtility.FromJson does not support top-level arrays.
-            //ManufacturingInfo[] manufacturingData = JsonUtility.FromJson<Wrapper>("{\"manufacturingData\":" + jsonResponse + "}").manufacturingData;
-            //? another way for not using wrapper class => JsonConvert trong thư viện System.Net
-            manufacturingData = JsonConvert.DeserializeObject<ManufacturingInfo[]>(jsonResponse);
-            if (manufacturingData == null || manufacturingData.Length == 0)
-            {
-                Debug.LogError("Failed to parse JSON data or no data found.");
-                loadingAnimator.SetActive(false);
-                loadingAnimator.GetComponent<Animator>().SetBool("Loading", false);
-                yield break;
-            }
-        }
-        catch (WebException e)
-        {
-            Debug.LogError("Error: " + e.Message);
-            loadingAnimator.SetActive(false);
-            loadingAnimator.GetComponent<Animator>().SetBool("Loading", false);
-            yield break;
-        }
-        //  yield return new WaitForSeconds(3);
-        employeeText.text = manufacturingData[0].stations[0].employees[0].employeeName;
+
+    }
+    public void CloseLoadingIndicator()
+    {
         loadingAnimator.SetActive(false);
         loadingAnimator.GetComponent<Animator>().SetBool("Loading", false);
-        yield break;
+    }
+    public void SetManufacturingInfoData(ManufacturingInfo manufacturingData)
+    {
+        if (manufacturingData.productName != null)
+        {
+
+            productNameText.text = $"{manufacturingData.productName} {manufacturingData.referenceName}";
+        }
+        else
+        {
+            productNameText.text = "--";
+        }
+        referenceIdText.text = manufacturingData.referenceId ?? "--";
+        lotCodeText.text = manufacturingData.lotCode ?? "--";
+        lotSizeText.text = manufacturingData.lotSize.ToString() ?? "--";
+        if (manufacturingData.stations.Length > 0 && manufacturingData.stations[0].employees.Length > 0)
+        {
+            employeeText.text = manufacturingData.stations[0].employees[0].employeeName ?? "--";
+        }
+        else
+        {
+            employeeText.text = "--";
+        }
+
     }
 }
 

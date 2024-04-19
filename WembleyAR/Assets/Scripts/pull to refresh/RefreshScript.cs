@@ -33,7 +33,8 @@ public class RefreshScript : MonoBehaviour
         if (isPulled && distance < 100)
         {
             isPulled = false;
-            StartCoroutine(manufacturingInfoScript.GetManufacturingInfoData());
+            //! đừng thêm async/await
+            manufacturingInfoScript.UpdateManufacturingInforData();
         }
 
 

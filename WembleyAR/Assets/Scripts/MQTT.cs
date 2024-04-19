@@ -22,15 +22,15 @@ public class Data
     }
 
 }
-public class HeightData
+public class DoubleTypeData
 {
     public string name;
     public double value;
     public string timestamp;
 
-    public static HeightData CreateFromJSON(string jsonString)
+    public static DoubleTypeData CreateFromJSON(string jsonString)
     {
-        return JsonUtility.FromJson<HeightData>(jsonString);
+        return JsonUtility.FromJson<DoubleTypeData>(jsonString);
     }
 
 }
@@ -89,7 +89,7 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
     }
     protected override void SubscribeTopics()
     {
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/Encoder Value" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+        //client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/Encoder Value" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
         /*
         //! S1
         client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/Encoder Value" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
@@ -323,6 +323,9 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
     }
     protected override void DecodeMessage(string topic, byte[] message)
     {
+        string msg = System.Text.Encoding.UTF8.GetString(message);
+
+        Debug.Log(msg);
         /*
         Debug.Log("Da nhan");
         int c = 0;
@@ -355,8 +358,8 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
                     }
                 }  */
 
-        string valueKey = topic.Remove(0, 23);
-        string msg = System.Text.Encoding.UTF8.GetString(message);
+        string valueKey = topic.Remove(0, 31);
+        // string msg = System.Text.Encoding.UTF8.GetString(message);
 
         msg = msg.TrimStart("[").TrimEnd("]");
 
@@ -450,52 +453,52 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
         {
             if (valueKey.Contains("MAXIMUM_HEIGHT_VALUE_TR1"))
             {
-                GlobalVariable.S8_max_1 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S8_max_1 = DoubleTypeData.CreateFromJSON(msg).value;
                 Debug.Log(GlobalVariable.S8_max_1);
 
             }
             else if (valueKey.Contains("MINIMUN_HEIGHT_VALUE_TR1"))
             {
-                GlobalVariable.S8_min_1 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S8_min_1 = DoubleTypeData.CreateFromJSON(msg).value;
 
             }
             else if (valueKey.Contains("CURRENT_HEIGHT_TR1"))
             {
-                GlobalVariable.S8_current_1 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S8_current_1 = DoubleTypeData.CreateFromJSON(msg).value;
             }
             else if (valueKey.Contains("TOTAL_HEIGHT_TR1"))
             {
-                GlobalVariable.S8_measured_1 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S8_measured_1 = DoubleTypeData.CreateFromJSON(msg).value;
                 Debug.Log(GlobalVariable.S8_measured_1);
 
             }
             else if (valueKey.Contains("OFF_SET_TR1"))
             {
-                GlobalVariable.S8_offset_1 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S8_offset_1 = DoubleTypeData.CreateFromJSON(msg).value;
 
             }
             else if (valueKey.Contains("MAXIMUM_HEIGHT_VALUE_TR3"))
             {
-                GlobalVariable.S8_max_3 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S8_max_3 = DoubleTypeData.CreateFromJSON(msg).value;
 
             }
             else if (valueKey.Contains("MINIMUN_HEIGHT_VALUE_TR3"))
             {
-                GlobalVariable.S8_min_3 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S8_min_3 = DoubleTypeData.CreateFromJSON(msg).value;
 
             }
             else if (valueKey.Contains("CURRENT_HEIGHT_TR3"))
             {
-                GlobalVariable.S8_current_3 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S8_current_3 = DoubleTypeData.CreateFromJSON(msg).value;
             }
             else if (valueKey.Contains("TOTAL_HEIGHT_TR3"))
             {
-                GlobalVariable.S8_measured_3 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S8_measured_3 = DoubleTypeData.CreateFromJSON(msg).value;
 
             }
             else if (valueKey.Contains("OFF_SET_TR3"))
             {
-                GlobalVariable.S8_offset_3 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S8_offset_3 = DoubleTypeData.CreateFromJSON(msg).value;
 
             }
         }
@@ -505,55 +508,55 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
             // if (valueKey.Contains("TOTAL_HEIGHT_TR2"))
             // {
             //     Debug.Log(msg);
-            //     Debug.Log(HeightData.CreateFromJSON(msg).value);
+            //     Debug.Log(DoubleTypeData.CreateFromJSON(msg).value);
 
             // }
             if (valueKey.Contains("MAXIMUM_HEIGHT_VALUE_TR2"))
             {
-                GlobalVariable.S9_max_2 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S9_max_2 = DoubleTypeData.CreateFromJSON(msg).value;
 
             }
             else if (valueKey.Contains("MINIMUN_HEIGHT_VALUE_TR2"))
             {
-                GlobalVariable.S9_min_2 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S9_min_2 = DoubleTypeData.CreateFromJSON(msg).value;
 
             }
             else if (valueKey.Contains("CURRENT_HEIGHT_TR2"))
             {
-                GlobalVariable.S9_current_2 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S9_current_2 = DoubleTypeData.CreateFromJSON(msg).value;
             }
             else if (valueKey.Contains("TOTAL_HEIGHT_TR2"))
             {
-                GlobalVariable.S9_measured_2 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S9_measured_2 = DoubleTypeData.CreateFromJSON(msg).value;
 
             }
             else if (valueKey.Contains("OFF_SET_TR2"))
             {
-                GlobalVariable.S9_offset_2 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S9_offset_2 = DoubleTypeData.CreateFromJSON(msg).value;
 
             }
             else if (valueKey.Contains("MAXIMUM_HEIGHT_VALUE_TR4"))
             {
-                GlobalVariable.S9_max_4 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S9_max_4 = DoubleTypeData.CreateFromJSON(msg).value;
 
             }
             else if (valueKey.Contains("MINIMUN_HEIGHT_VALUE_TR4"))
             {
-                GlobalVariable.S9_min_4 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S9_min_4 = DoubleTypeData.CreateFromJSON(msg).value;
 
             }
             else if (valueKey.Contains("CURRENT_HEIGHT_TR4"))
             {
-                GlobalVariable.S9_current_4 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S9_current_4 = DoubleTypeData.CreateFromJSON(msg).value;
             }
             else if (valueKey.Contains("TOTAL_HEIGHT_TR4"))
             {
-                GlobalVariable.S9_measured_4 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S9_measured_4 = DoubleTypeData.CreateFromJSON(msg).value;
 
             }
             else if (valueKey.Contains("OFF_SET_TR4"))
             {
-                GlobalVariable.S9_offset_4 = HeightData.CreateFromJSON(msg).value;
+                GlobalVariable.S9_offset_4 = DoubleTypeData.CreateFromJSON(msg).value;
 
             }
         }
@@ -589,6 +592,78 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
         {
             int index = int.Parse(valueKey.Remove(0, 8));
             GlobalVariable.outputStation12[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+        }
+        else if (valueKey.Contains("GOOD_CNT_TR"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 11));
+            GlobalVariable.goodProductCountTR[index - 1] = int.Parse(Data.CreateFromJSON(msg).value);
+        }
+        else if (valueKey.Contains("BAD_CNT_TR"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 10));
+            GlobalVariable.badProductCountTR[index - 1] = int.Parse(Data.CreateFromJSON(msg).value);
+        }
+        else if (valueKey.Contains("TOTAL_CNT_TR"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 12));
+            GlobalVariable.productCountTR[index - 1] = int.Parse(Data.CreateFromJSON(msg).value);
+        }
+        else if (valueKey.Contains("BOTTOM_CAP_REJ_TR"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 17));
+            GlobalVariable.RejCountS1TR[index - 1] = int.Parse(Data.CreateFromJSON(msg).value);
+        }
+        else if (valueKey.Contains("SILICON_PRESENCE_REJ_TR"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 23));
+            GlobalVariable.RejCountS3TR[index - 1] = int.Parse(Data.CreateFromJSON(msg).value);
+        }
+        else if (valueKey.Contains("COVER_PRESENCE_REJ_TR"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 21));
+            GlobalVariable.RejCountS5TR[index - 1] = int.Parse(Data.CreateFromJSON(msg).value);
+        }
+        else if (valueKey.Contains("HEIGHT_CHK_REJ_TR"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 17));
+            GlobalVariable.RejCountS89TR[index - 1] = int.Parse(Data.CreateFromJSON(msg).value);
+        }
+        else if (valueKey.Contains("LEAK_TEST_CHK_TR"))
+        {
+            int index = int.Parse(valueKey.Remove(0, 16));
+            GlobalVariable.RejCountS10TR[index - 1] = int.Parse(Data.CreateFromJSON(msg).value);
+        }
+        else if (valueKey.Contains("LEAK_TEST_CHK_OK_TR1"))
+        {
+            GlobalVariable.RejCountS10TR[0] = int.Parse(Data.CreateFromJSON(msg).value);
+        }
+        else
+        {
+            switch (valueKey)
+            {
+                case "productCount":
+                    GlobalVariable.productCount = int.Parse(Data.CreateFromJSON(msg).value);
+                    break;
+                case "goodProductRaw":
+                    GlobalVariable.goodProductCount = int.Parse(Data.CreateFromJSON(msg).value);
+                    break;
+                case "errorProduct":
+                    GlobalVariable.badProductCount = int.Parse(Data.CreateFromJSON(msg).value);
+                    break;
+                case "EFF":
+                    GlobalVariable.effective = DoubleTypeData.CreateFromJSON(msg).value;
+                    break;
+                case "operationTimeRaw":
+                    GlobalVariable.operationTime = Data.CreateFromJSON(msg).value;
+                    break;
+                // case "errorStatus":
+                //     ErrorInfor errorInfor = new ErrorInfor { errorName = Data.CreateFromJSON(msg).value, time = data.TimeStamp.ToString("HH:mm:ss dd/MM/yyyy") };
+                //     GlobalVariable.errorInfors.Add(errorInfor);
+                //     alarmScript.gameObject.GetComponent<ErrorListView>().GenerateListView(GlobalVariable.errorInfors);
+                //     break;
+                default:
+                    break;
+            }
         }
     }
 }

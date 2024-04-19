@@ -6,18 +6,18 @@ public class MQTT_Data_Station_12 : MonoBehaviour
 {
     MQTT mqtt;
     List<string> topicStation12 = new List<string> {
-
-                    "HCM/IE-F2-HCA01/Metric/S11/in/00" ,
-         "HCM/IE-F2-HCA01/Metric/S11/out/00" ,
-         "HCM/IE-F2-HCA01/Metric/S11/out/01" ,
-         "HCM/IE-F2-HCA01/Metric/S11/out/02" ,
-         "HCM/IE-F2-HCA01/Metric/S11/out/03" ,
-         "HCM/IE-F2-HCA01/Metric/S11/out/04" ,
-         "HCM/IE-F2-HCA01/Metric/S11/out/05" ,
-         "HCM/IE-F2-HCA01/Metric/S11/out/06" ,
-         "HCM/IE-F2-HCA01/Metric/S11/out/07" ,
-         "HCM/IE-F2-HCA01/Metric/S11/out/08" ,
-         "HCM/IE-F2-HCA01/Metric/S11/out/09" ,
+         $"{GlobalVariable.basedTopic}/Encoder Value" ,
+         $"{GlobalVariable.basedTopic}/S12/in/00" ,
+         $"{GlobalVariable.basedTopic}/S12/out/00" ,
+         $"{GlobalVariable.basedTopic}/S12/out/01" ,
+         $"{GlobalVariable.basedTopic}/S12/out/02" ,
+         $"{GlobalVariable.basedTopic}/S12/out/03" ,
+         $"{GlobalVariable.basedTopic}/S12/out/04" ,
+         $"{GlobalVariable.basedTopic}/S12/out/05" ,
+         $"{GlobalVariable.basedTopic}/S12/out/06" ,
+         $"{GlobalVariable.basedTopic}/S12/out/07" ,
+         $"{GlobalVariable.basedTopic}/S12/out/08" ,
+         $"{GlobalVariable.basedTopic}/S12/out/09" ,
 };
     void Awake()
     {

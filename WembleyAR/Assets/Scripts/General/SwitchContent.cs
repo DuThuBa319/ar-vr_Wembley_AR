@@ -4,31 +4,31 @@ using UnityEngine;
 
 public class SwitchContent : MonoBehaviour
 {
-    public GameObject generalSwitchOn, generalSwitchOff, detailSwitchOn, detailSwitchOff;
-    public GameObject generalContent, detailContent;
+    public GameObject overviewSwitchOn, overviewSwitchOff, detailSwitchOn, detailSwitchOff;
+    public GameObject overviewContent, detailContent;
     void Start()
     {
-        generalSwitchOn.SetActive(true);
-        generalSwitchOff.SetActive(false);
-        generalContent.SetActive(true);
+        overviewSwitchOn.SetActive(true);
+        overviewSwitchOff.SetActive(false);
+        overviewContent.SetActive(true);
         detailSwitchOn.SetActive(false);
         detailSwitchOff.SetActive(true);
         detailContent.SetActive(false);
     }
     public void ShowDetailContent()
     {
-        generalSwitchOn.SetActive(false);
-        generalSwitchOff.SetActive(true);
-        generalContent.SetActive(false);
+        overviewSwitchOn.SetActive(false);
+        overviewSwitchOff.SetActive(true);
+        overviewContent.SetActive(false);
         detailSwitchOn.SetActive(true);
         detailSwitchOff.SetActive(false);
         detailContent.SetActive(true);
     }
-    public void ShowGeneralContent()
+    public void ShowOverviewContent()
     {
-        generalSwitchOn.SetActive(true);
-        generalSwitchOff.SetActive(false);
-        generalContent.SetActive(true);
+        overviewSwitchOn.SetActive(true);
+        overviewSwitchOff.SetActive(false);
+        overviewContent.SetActive(true);
         detailSwitchOn.SetActive(false);
         detailSwitchOff.SetActive(true);
         detailContent.SetActive(false);

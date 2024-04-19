@@ -5,12 +5,15 @@ using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using TMPro;
 public class SignalRData : MonoBehaviour
 {
+    public GameObject alarmScript;
 
 
     void Start()
     {
+
         StartConnectWebApi();
     }
 
@@ -21,56 +24,87 @@ public class SignalRData : MonoBehaviour
 
     }
 
-    void StartConnectWebApi()
+    private async void StartConnectWebApi()
     {
-        GlobalVariable.hubConnection = new HubConnectionBuilder().WithUrl(GlobalVariable.url).WithAutomaticReconnect().Build();
-        GlobalVariable.hubConnection.ServerTimeout = TimeSpan.FromSeconds(10);
+
+        if (GlobalVariable.hubConnection == null)
+        {
+            // Tạo kết nối
+            GlobalVariable.hubConnection = GlobalVariable.hubConnection = new HubConnectionBuilder().WithUrl(GlobalVariable.url)
+                .WithAutomaticReconnect()
+                .Build();
+        }
+
+
+        GlobalVariable.hubConnection.On<string>("OnTagChanged", (str) =>
+        {
+            Debug.Log("$$" + str);
+            DataSignalR data = JsonConvert.DeserializeObject<DataSignalR>(str);
+            if (data != null)
+            {
+                UpdateData(data, str);
+            }
+        });
+        GlobalVariable.hubConnection.On<string>("LogInfoMessage", (str) =>
+        {
+            if (str.Contains("Connected"))
+            {
+                UpdateTopics(GlobalVariable.subscribedTopics);
+                GlobalVariable.isConnecting = false;
+                GlobalVariable.serverConnected = true;
+            }
+        });
+        GlobalVariable.isConnecting = true;
         try
         {
-
-            GlobalVariable.hubConnection.On<string>("OnTagChanged", (str) =>
-            {
-                Debug.Log("$$" + str);
-                DataSignalR data = JsonConvert.DeserializeObject<DataSignalR>(str);
-                if (data != null)
-                {
-
-                    UpdateData(data, str);
-                }
-            });
-            GlobalVariable.hubConnection.On<string>("LogInfoMessage", (str) =>
-            {
-                Debug.Log(str);
-                if (str.Contains("Connected"))
-                {
-                    UpdateTopics(GlobalVariable.subscribedTopics);
-                }
-            });
-
-            GlobalVariable.hubConnection.StartAsync().ContinueWith(task =>
+            await GlobalVariable.hubConnection.StartAsync().ContinueWith(task =>
             {
                 if (task.IsFaulted)
                 {
-                    Debug.Log("There was an error opening the connection:" + task.Exception.GetBaseException());
+                    Debug.Log("There was an error opening the GlobalVariable.hubConnection:" + task.Exception.GetBaseException());
+                    GlobalVariable.errorServerConnected = true;
+                    GlobalVariable.isConnecting = false;
                 }
-                else
+                if (task.IsCompletedSuccessfully)
                 {
-                    Debug.Log("Connected");
+                    GlobalVariable.isConnecting = false;
+                    GlobalVariable.serverConnected = true;
                 }
-            });
 
-            //   await GlobalVariable.hubConnection.InvokeAsync("UpdateTopics", new List<string>() { $"{basedTopic}/" });
+            });
         }
         catch (Exception e)
         {
             Debug.Log(e);
             throw;
         }
+        GlobalVariable.hubConnection.Reconnecting += (exception) =>
+            {
+
+                if (exception != null)
+                {
+                    Debug.Log("There was an error opening the GlobalVariable.hubConnection:" + exception.GetBaseException());
+                    GlobalVariable.errorServerConnected = true;
+                    GlobalVariable.isConnecting = false;
+                }
+
+                GlobalVariable.isConnecting = true;
+                return Task.CompletedTask;
+            };
+
+        GlobalVariable.hubConnection.Reconnected += (ConnectionId) =>
+        {
+            GlobalVariable.isConnecting = false;
+            GlobalVariable.serverConnected = true;
+            return Task.CompletedTask;
+        };
+
+
     }
+
 
     public void UpdateTopics(List<string> topics)
     {
-
         GlobalVariable.hubConnection.InvokeAsync("UpdateTopics", topics);
     }
     void UpdateData(DataSignalR data, string msg)
@@ -301,6 +335,69 @@ public class SignalRData : MonoBehaviour
 
                     }
                 }
+                else if (data.TagId.Contains("REJ"))
+                {
+                    if (data.TagId.Contains("TR1"))
+                    {
+                        GlobalVariable.RejCountS89TR[0] = int.Parse(data.TagValue);
+                    }
+                    else if (data.TagId.Contains("TR2"))
+                    {
+                        GlobalVariable.RejCountS89TR[1] = int.Parse(data.TagValue);
+                    }
+                    else if (data.TagId.Contains("TR3"))
+                    {
+                        GlobalVariable.RejCountS89TR[2] = int.Parse(data.TagValue);
+                    }
+                    else if (data.TagId.Contains("TR4"))
+                    {
+                        GlobalVariable.RejCountS89TR[3] = int.Parse(data.TagValue);
+                    }
+                }
+            }
+            else if (data.TagId.Contains("GOOD_CNT_TR"))
+            {
+                int index = int.Parse(data.TagId.Remove(0, 11));
+                GlobalVariable.goodProductCountTR[index - 1] = int.Parse(data.TagValue);
+            }
+            else if (data.TagId.Contains("BAD_CNT_TR"))
+            {
+                int index = int.Parse(data.TagId.Remove(0, 10));
+                GlobalVariable.badProductCountTR[index - 1] = int.Parse(data.TagValue);
+            }
+            else if (data.TagId.Contains("TOTAL_CNT_TR"))
+            {
+                int index = int.Parse(data.TagId.Remove(0, 12));
+                GlobalVariable.productCountTR[index - 1] = int.Parse(data.TagValue);
+            }
+            else if (data.TagId.Contains("BOTTOM_CAP_REJ_TR"))
+            {
+                int index = int.Parse(data.TagId.Remove(0, 17));
+                GlobalVariable.RejCountS1TR[index - 1] = int.Parse(data.TagValue);
+            }
+            else if (data.TagId.Contains("SILICON_PRESENCE_REJ_TR"))
+            {
+                int index = int.Parse(data.TagId.Remove(0, 23));
+                GlobalVariable.RejCountS3TR[index - 1] = int.Parse(data.TagValue);
+            }
+            else if (data.TagId.Contains("COVER_PRESENCE_REJ_TR"))
+            {
+                int index = int.Parse(data.TagId.Remove(0, 21));
+                GlobalVariable.RejCountS5TR[index - 1] = int.Parse(data.TagValue);
+            }
+            else if (data.TagId.Contains("HEIGHT_CHK_REJ_TR"))
+            {
+                int index = int.Parse(data.TagId.Remove(0, 17));
+                GlobalVariable.RejCountS89TR[index - 1] = int.Parse(data.TagValue);
+            }
+            else if (data.TagId.Contains("LEAK_TEST_CHK_TR"))
+            {
+                int index = int.Parse(data.TagId.Remove(0, 16));
+                GlobalVariable.RejCountS10TR[index - 1] = int.Parse(data.TagValue);
+            }
+            else if (data.TagId.Contains("LEAK_TEST_CHK_OK_TR1"))
+            {
+                GlobalVariable.RejCountS10TR[0] = int.Parse(data.TagValue);
             }
             else
             {
@@ -309,36 +406,26 @@ public class SignalRData : MonoBehaviour
                     case "Encoder Value":
                         GlobalVariable.encoderPosition = int.Parse(data.TagValue);
                         break;
-                    // case "productCount":
-                    //     GlobalVariable.encoderPosition = Convert.ToInt32(data.TagValue);
-                    //     break;
-                    // case "productCount":
-                    //     GlobalVariable.encoderPosition = Convert.ToInt32(data.TagValue);
-                    //     break;
-                    // case "productCount":
-                    //     GlobalVariable.encoderPosition = Convert.ToInt32(data.TagValue);
-                    //     break;
-                    // case "productCount":
-                    //     GlobalVariable.encoderPosition = Convert.ToInt32(data.TagValue);
-                    //     break;
-                    // case "productCount":
-                    //     GlobalVariable.encoderPosition = Convert.ToInt32(data.TagValue);
-                    //     break;
-                    // case "productCount":
-                    //     GlobalVariable.encoderPosition = Convert.ToInt32(data.TagValue);
-                    //     break;
-                    // case "productCount":
-                    //     GlobalVariable.encoderPosition = Convert.ToInt32(data.TagValue);
-                    //     break;
-                    // case "productCount":
-                    //     GlobalVariable.encoderPosition = Convert.ToInt32(data.TagValue);
-                    //     break;
-                    // case "productCount":
-                    //     GlobalVariable.encoderPosition = Convert.ToInt32(data.TagValue);
-                    //     break;
-                    // case "productCount":
-                    //     GlobalVariable.encoderPosition = Convert.ToInt32(data.TagValue);
-                    //     break;
+                    case "productCount":
+                        GlobalVariable.productCount = int.Parse(data.TagValue);
+                        break;
+                    case "goodProductRaw":
+                        GlobalVariable.goodProductCount = int.Parse(data.TagValue);
+                        break;
+                    case "errorProduct":
+                        GlobalVariable.badProductCount = int.Parse(data.TagValue);
+                        break;
+                    case "EFF":
+                        GlobalVariable.effective = double.Parse(data.TagValue);
+                        break;
+                    case "operationTimeRaw":
+                        GlobalVariable.operationTime = data.TagValue;
+                        break;
+                    case "errorStatus":
+                        ErrorInfor errorInfor = new ErrorInfor { errorName = data.TagValue, time = data.TimeStamp.ToString("HH:mm:ss dd/MM/yyyy") };
+                        GlobalVariable.errorInfors.Add(errorInfor);
+                        alarmScript.gameObject.GetComponent<ErrorListView>().GenerateListView(GlobalVariable.errorInfors);
+                        break;
                     default:
                         break;
                 }
