@@ -15,6 +15,7 @@ public class GlobalVariable : MonoBehaviour
     public static bool serverConnected = false;
     public static bool isConnecting = false;
     public static bool errorServerConnected = false;
+    public static bool isCameraEnabled = false;
     public static int encoderPosition = 0;
     //? Station 1
     public static bool[] inputStation1 = new bool[14];

@@ -39,6 +39,7 @@ public class OpenStationCanvas : MonoBehaviour
         clickBtn.SetActive(false);
         monitorCanvas.SetActive(false);
         ARCamera.GetComponent<VuforiaBehaviour>().enabled = false;
+        GlobalVariable.isCameraEnabled = false;
     }
     public void onCloseCanvas()
     {
@@ -46,5 +47,6 @@ public class OpenStationCanvas : MonoBehaviour
         clickBtn.SetActive(true);
         monitorCanvas.SetActive(true);
         ARCamera.GetComponent<VuforiaBehaviour>().enabled = true;
+        GlobalVariable.isCameraEnabled = true;
     }
 }

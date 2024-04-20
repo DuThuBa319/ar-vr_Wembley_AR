@@ -104,7 +104,7 @@ public class ManufacturingInfoScript : MonoBehaviour
         lotSizeText.text = manufacturingData.lotSize.ToString() ?? "--";
         if (manufacturingData.stations.Length > 0 && manufacturingData.stations[0].employees.Length > 0)
         {
-            employeeText.text = manufacturingData.stations[0].employees[0].employeeName ?? "--";
+            employeeText.text = $"{manufacturingData.stations[0].employees[0].employeeId} - {manufacturingData.stations[0].employees[0].employeeName}";
         }
         else
         {
