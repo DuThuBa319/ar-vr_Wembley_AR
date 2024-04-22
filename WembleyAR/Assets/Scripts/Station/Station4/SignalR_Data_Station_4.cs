@@ -16,13 +16,14 @@ public class SignalR_Data_Station_4 : MonoBehaviour
     }
     void OnEnable()
     {
-        GlobalVariable.subscribedTopics = topicStation4;
-        signalR.UpdateTopics(topicStation4);
+        GlobalVariable.subscribedTopics = GlobalVariable.initialTopic;
+        GlobalVariable.subscribedTopics.AddRange(topicStation4);
+        signalR.UpdateTopics(GlobalVariable.subscribedTopics);
     }
 
     void OnDisable()
     {
-        GlobalVariable.subscribedTopics = new List<string>();
-        signalR.UpdateTopics(new List<string>());
+        GlobalVariable.subscribedTopics = GlobalVariable.initialTopic;
+        signalR.UpdateTopics(GlobalVariable.subscribedTopics);
     }
 }

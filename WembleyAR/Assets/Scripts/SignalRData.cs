@@ -9,11 +9,38 @@ using TMPro;
 public class SignalRData : MonoBehaviour
 {
     public GameObject alarmScript;
+    public GameObject[] inputCheckS1;
+    public GameObject[] outputCheckS1;
+    public GameObject[] inputCheckS2;
+    public GameObject[] outputCheckS2;
+    public GameObject[] inputCheckS3;
+    public GameObject[] outputCheckS3;
+    public GameObject[] inputCheckS4;
+    public GameObject[] outputCheckS4;
+    public GameObject[] inputCheckS5;
+    public GameObject[] outputCheckS5;
+    public GameObject[] inputCheckS6;
+    public GameObject[] outputCheckS6;
+    public GameObject[] inputCheckS7;
+    public GameObject[] outputCheckS7;
+    public GameObject[] inputCheckS10;
+    public GameObject[] outputCheckS10;
+    public GameObject[] inputCheckS11;
+    public GameObject[] outputCheckS11;
+    public GameObject[] inputCheckS12;
+    public GameObject[] outputCheckS12;
+    public GameObject[] S1SensorCheck;
+    public GameObject[] S2SensorCheck;
+    public GameObject[] S3SensorCheck;
+    public GameObject[] S4SensorCheck;
+    public GameObject[] S5SensorCheck;
+    public GameObject[] S10SensorCheck;
+    public GameObject[] S12SensorCheck;
+    bool isReset;
 
 
     void Start()
     {
-
         StartConnectWebApi();
     }
 
@@ -38,7 +65,7 @@ public class SignalRData : MonoBehaviour
 
         GlobalVariable.hubConnection.On<string>("OnTagChanged", (str) =>
         {
-            Debug.Log("$$" + str);
+            //  Debug.Log("$$" + str);
             DataSignalR data = JsonConvert.DeserializeObject<DataSignalR>(str);
             if (data != null)
             {
@@ -69,6 +96,7 @@ public class SignalRData : MonoBehaviour
                 {
                     GlobalVariable.isConnecting = false;
                     GlobalVariable.serverConnected = true;
+                    UpdateTopics(GlobalVariable.initialTopic);
                 }
 
             });
@@ -102,7 +130,23 @@ public class SignalRData : MonoBehaviour
 
     }
 
-
+    void Update()
+    {
+        if (isReset && GlobalVariable.encoderPosition > 0 && GlobalVariable.encoderPosition < 100)
+        {
+            isReset = false;
+        }
+        if (!isReset && GlobalVariable.encoderPosition > 150 && GlobalVariable.encoderPosition < 250)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                S10SensorCheck[i + 2].SetActive(false);
+                S5SensorCheck[i + 1].SetActive(false);
+                S3SensorCheck[i + 1].SetActive(false);
+            }
+            isReset = true;
+        }
+    }
     public void UpdateTopics(List<string> topics)
     {
         GlobalVariable.hubConnection.InvokeAsync("UpdateTopics", topics);
@@ -117,80 +161,108 @@ public class SignalRData : MonoBehaviour
                 if (data.TagId.Contains("S1/in/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 6));
-                    GlobalVariable.inputStation1[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    inputCheckS1[index].SetActive(value);
+                    if (index != 0 && index != 1) S1SensorCheck[index - 2].SetActive(value);
 
                 }
                 else if (data.TagId.Contains("S1/out/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 7));
-                    GlobalVariable.outputStation1[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    outputCheckS1[index].SetActive(value);
+                    if (index == 12) GlobalVariable.outputStation1[12] = value;
                 }
                 //! S2
                 else if (data.TagId.Contains("S2/in/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 6));
-                    GlobalVariable.inputStation2[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    inputCheckS2[index].SetActive(value);
+                    if (index != 0 && index != 2) S2SensorCheck[index - 2].SetActive(value);
+
 
                 }
                 else if (data.TagId.Contains("S2/out/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 7));
-                    GlobalVariable.outputStation2[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    outputCheckS2[index].SetActive(value);
                 }
                 //! S3
                 else if (data.TagId.Contains("S3/in/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 6));
-                    GlobalVariable.inputStation3[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    inputCheckS3[index].SetActive(value);
+                    if (index > 0 && index < 5)
+                    {
+                        if (value) S3SensorCheck[index - 1].SetActive(value);
+                    }
                 }
                 else if (data.TagId.Contains("S3/out/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 7));
-                    GlobalVariable.outputStation3[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    outputCheckS3[index].SetActive(value);
                 }
                 //! S4
                 else if (data.TagId.Contains("S4/in/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 6));
-                    GlobalVariable.inputStation4[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    inputCheckS4[index].SetActive(value);
+                    if (index != 0 && index != 1) S4SensorCheck[index - 2].SetActive(value);
                 }
                 else if (data.TagId.Contains("S4/out/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 7));
-                    GlobalVariable.outputStation4[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    outputCheckS4[index].SetActive(value);
                 }
                 //! S5
                 else if (data.TagId.Contains("S5/in/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 6));
-                    GlobalVariable.inputStation5[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    inputCheckS5[index].SetActive(value);
+                    if (index > 0)
+                    {
+                        if (value) S5SensorCheck[index - 1].SetActive(value);
+                    }
                 }
                 else if (data.TagId.Contains("S5/out/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 7));
-                    GlobalVariable.outputStation5[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    outputCheckS5[index].SetActive(value);
                 }
                 //! S6
                 else if (data.TagId.Contains("S6/in/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 6));
-                    GlobalVariable.inputStation6[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    inputCheckS6[index].SetActive(value);
                 }
                 else if (data.TagId.Contains("S6/out/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 7));
-                    GlobalVariable.outputStation6[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    outputCheckS6[index].SetActive(value);
                 }
                 //! S7
                 else if (data.TagId.Contains("S7/in/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 6));
-                    GlobalVariable.inputStation7[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    inputCheckS7[index].SetActive(value);
                 }
                 else if (data.TagId.Contains("S7/out/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 7));
-                    GlobalVariable.outputStation7[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    outputCheckS7[index].SetActive(value);
+
                 }
 
 
@@ -198,34 +270,46 @@ public class SignalRData : MonoBehaviour
                 else if (data.TagId.Contains("S10/in/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 7));
-                    GlobalVariable.inputStation10[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    inputCheckS10[index].SetActive(value);
+                    if (index > 1 && index < 6)
+                    {
+                        if (value)
+                            S10SensorCheck[index - 2].SetActive(value);
+                    }
                 }
                 else if (data.TagId.Contains("S10/out/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 8));
-                    GlobalVariable.outputStation10[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    outputCheckS10[index].SetActive(value);
                 }
                 //! S11
                 else if (data.TagId.Contains("S11/in/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 7));
-                    GlobalVariable.inputStation11[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    inputCheckS11[index].SetActive(value);
                 }
                 else if (data.TagId.Contains("S11/out/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 8));
-                    GlobalVariable.outputStation11[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    outputCheckS11[index].SetActive(value);
                 }
                 //! S12
                 else if (data.TagId.Contains("S12/in/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 7));
-                    GlobalVariable.inputStation12[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    inputCheckS12[index].SetActive(value);
+                    S12SensorCheck[index].SetActive(value);
                 }
                 else if (data.TagId.Contains("S12/out/"))
                 {
                     int index = int.Parse(data.TagId.Remove(0, 8));
-                    GlobalVariable.outputStation12[index] = data.TagValue == "1" ? true : false;
+                    bool value = data.TagValue == "1" ? true : false;
+                    outputCheckS12[index].SetActive(value);
                 }
             }
             else if (data.TagId.Contains("HEIGHT"))
@@ -235,7 +319,7 @@ public class SignalRData : MonoBehaviour
                     if (data.TagId.Contains("MAXIMUM_HEIGHT_VALUE_TR1"))
                     {
                         GlobalVariable.S8_max_1 = JsonConvert.DeserializeObject<DoubleTypeDataModel>(msg).TagValue;
-                        Debug.Log(GlobalVariable.S8_max_1);
+
 
                     }
                     else if (data.TagId.Contains("MINIMUN_HEIGHT_VALUE_TR1"))
@@ -250,7 +334,7 @@ public class SignalRData : MonoBehaviour
                     else if (data.TagId.Contains("TOTAL_HEIGHT_TR1"))
                     {
                         GlobalVariable.S8_measured_1 = JsonConvert.DeserializeObject<DoubleTypeDataModel>(msg).TagValue;
-                        Debug.Log(GlobalVariable.S8_measured_1);
+                        // Debug.Log(GlobalVariable.S8_measured_1);
 
                     }
                     else if (data.TagId.Contains("OFF_SET_TR1"))
@@ -337,22 +421,9 @@ public class SignalRData : MonoBehaviour
                 }
                 else if (data.TagId.Contains("REJ"))
                 {
-                    if (data.TagId.Contains("TR1"))
-                    {
-                        GlobalVariable.RejCountS89TR[0] = int.Parse(data.TagValue);
-                    }
-                    else if (data.TagId.Contains("TR2"))
-                    {
-                        GlobalVariable.RejCountS89TR[1] = int.Parse(data.TagValue);
-                    }
-                    else if (data.TagId.Contains("TR3"))
-                    {
-                        GlobalVariable.RejCountS89TR[2] = int.Parse(data.TagValue);
-                    }
-                    else if (data.TagId.Contains("TR4"))
-                    {
-                        GlobalVariable.RejCountS89TR[3] = int.Parse(data.TagValue);
-                    }
+                    //data.TagId.Contains("HEIGHT_CHK_REJ_TR")
+                    int index = int.Parse(data.TagId.Remove(0, 17));
+                    GlobalVariable.RejCountS89TR[index - 1] = int.Parse(data.TagValue);
                 }
             }
             else if (data.TagId.Contains("GOOD_CNT_TR"))
@@ -385,11 +456,7 @@ public class SignalRData : MonoBehaviour
                 int index = int.Parse(data.TagId.Remove(0, 21));
                 GlobalVariable.RejCountS5TR[index - 1] = int.Parse(data.TagValue);
             }
-            else if (data.TagId.Contains("HEIGHT_CHK_REJ_TR"))
-            {
-                int index = int.Parse(data.TagId.Remove(0, 17));
-                GlobalVariable.RejCountS89TR[index - 1] = int.Parse(data.TagValue);
-            }
+
             else if (data.TagId.Contains("LEAK_TEST_CHK_TR"))
             {
                 int index = int.Parse(data.TagId.Remove(0, 16));
@@ -401,6 +468,7 @@ public class SignalRData : MonoBehaviour
             }
             else
             {
+                ErrorInfor errorInfor;
                 switch (data.TagId)
                 {
                     case "Encoder Value":
@@ -422,8 +490,20 @@ public class SignalRData : MonoBehaviour
                         GlobalVariable.operationTime = data.TagValue;
                         break;
                     case "errorStatus":
-                        ErrorInfor errorInfor = new ErrorInfor { errorName = data.TagValue, time = data.TimeStamp.ToString("HH:mm:ss dd/MM/yyyy") };
+                        errorInfor = new ErrorInfor { errorName = data.TagValue, time = data.TimeStamp.ToString("HH:mm:ss dd/MM/yyyy") };
                         GlobalVariable.errorInfors.Add(errorInfor);
+                        alarmScript.gameObject.GetComponent<ErrorListView>().GenerateListView(GlobalVariable.errorInfors);
+                        break;
+                    case "endErrorStatus":
+                        errorInfor = new ErrorInfor { errorName = data.TagValue, time = data.TimeStamp.ToString("HH:mm:ss dd/MM/yyyy") };
+                        for (int i = 0; i < GlobalVariable.errorInfors.Count; i++)
+                        {
+                            if (GlobalVariable.errorInfors[i].errorName == errorInfor.errorName)
+                            {
+                                GlobalVariable.errorInfors.RemoveAt(i);
+                                break;
+                            }
+                        }
                         alarmScript.gameObject.GetComponent<ErrorListView>().GenerateListView(GlobalVariable.errorInfors);
                         break;
                     default:
@@ -432,11 +512,6 @@ public class SignalRData : MonoBehaviour
             }
 
         }
-
-
-
-
-
     }
 }
 

@@ -10,6 +10,10 @@ public class GlobalVariable : MonoBehaviour
     public static HubConnection hubConnection;
     public static string url = "https://wembleyscada.azurewebsites.net/NotificationHub";
     public static string basedTopic = "Wembley/HerapinCap/IE-F2-HCA01";
+    public static List<string> initialTopic = new List<string> {
+         $"{basedTopic}/errorStatus" ,
+          $"{basedTopic}/endErrorStatus" ,
+          };
     public static List<string> subscribedTopics = new List<string>();
     public static bool networkConnected = false;
     public static bool serverConnected = false;
@@ -18,6 +22,7 @@ public class GlobalVariable : MonoBehaviour
     public static bool isCameraEnabled = false;
     public static int encoderPosition = 0;
     //? Station 1
+
     public static bool[] inputStation1 = new bool[14];
     public static bool[] outputStation1 = new bool[19];
     //? Station 2

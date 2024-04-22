@@ -9,8 +9,8 @@ public class IOListS2 : MonoBehaviour
     public GameObject inputBtn, outputBtn;
     public Sprite inputBtnOn, inputBtnOff;
     public Sprite outputBtnOn, outputBtnOff;
-    public GameObject[] inputCheck;
-    public GameObject[] outputCheck;
+    // public GameObject[] inputCheck;
+    // public GameObject[] outputCheck;
 
 
     // Start is called before the first frame update
@@ -21,19 +21,19 @@ public class IOListS2 : MonoBehaviour
         contentInput.SetActive(true);
         contentOutput.SetActive(false);
     }
-    void Update()
-    {
-        for (var i = 0; i < inputCheck.Length; i++)
-        {
-            if (GlobalVariable.inputStation2[i]) inputCheck[i].SetActive(true);
-            else inputCheck[i].SetActive(false);
-        }
-        for (var i = 0; i < outputCheck.Length; i++)
-        {
-            if (GlobalVariable.outputStation2[i]) outputCheck[i].SetActive(true);
-            else outputCheck[i].SetActive(false);
-        }
-    }
+    // void Update()
+    // {
+    //     for (var i = 0; i < inputCheck.Length; i++)
+    //     {
+    //         if (GlobalVariable.inputStation2[i]) inputCheck[i].SetActive(true);
+    //         else inputCheck[i].SetActive(false);
+    //     }
+    //     for (var i = 0; i < outputCheck.Length; i++)
+    //     {
+    //         if (GlobalVariable.outputStation2[i]) outputCheck[i].SetActive(true);
+    //         else outputCheck[i].SetActive(false);
+    //     }
+    // }
     public void onClickInputBtn()
     {
         inputBtn.GetComponent<Image>().sprite = inputBtnOn;

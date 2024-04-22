@@ -49,8 +49,34 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
 {
 
 
-    // public Text mqttAdress,valueSimulationText;
-    // public TMP_Text mqttAdress, valueSimulationText;
+    public GameObject[] inputCheckS1;
+    public GameObject[] outputCheckS1;
+    public GameObject[] inputCheckS2;
+    public GameObject[] outputCheckS2;
+    public GameObject[] inputCheckS3;
+    public GameObject[] outputCheckS3;
+    public GameObject[] inputCheckS4;
+    public GameObject[] outputCheckS4;
+    public GameObject[] inputCheckS5;
+    public GameObject[] outputCheckS5;
+    public GameObject[] inputCheckS6;
+    public GameObject[] outputCheckS6;
+    public GameObject[] inputCheckS7;
+    public GameObject[] outputCheckS7;
+    public GameObject[] inputCheckS10;
+    public GameObject[] outputCheckS10;
+    public GameObject[] inputCheckS11;
+    public GameObject[] outputCheckS11;
+    public GameObject[] inputCheckS12;
+    public GameObject[] outputCheckS12;
+    public GameObject[] S1SensorCheck;
+    public GameObject[] S2SensorCheck;
+    public GameObject[] S3SensorCheck;
+    public GameObject[] S4SensorCheck;
+    public GameObject[] S5SensorCheck;
+    public GameObject[] S10SensorCheck;
+    public GameObject[] S12SensorCheck;
+    bool isReset;
     protected override void Start()
     {
         base.Start();
@@ -72,6 +98,20 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
     protected override void Update()
     {
         base.Update();
+        if (isReset && GlobalVariable.encoderPosition > 0 && GlobalVariable.encoderPosition < 100)
+        {
+            isReset = false;
+        }
+        if (!isReset && GlobalVariable.encoderPosition > 150 && GlobalVariable.encoderPosition < 250)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                S10SensorCheck[i + 2].SetActive(false);
+                S5SensorCheck[i + 1].SetActive(false);
+                S3SensorCheck[i + 1].SetActive(false);
+            }
+            isReset = true;
+        }
     }
     public void SubscribeTopic(List<string> topics)
     {
@@ -89,231 +129,8 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
     }
     protected override void SubscribeTopics()
     {
-        //client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/Encoder Value" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        /*
-        //! S1
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/Encoder Value" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/in/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/in/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/in/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/in/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/in/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/in/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/in/07" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/in/08" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/in/09" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/in/10" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/in/11" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/in/12" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/in/13" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/07" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/08" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/09" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/10" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/11" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/12" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/13" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/14" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/15" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/16" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/17" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S1/out/18" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        //! S2
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/Encoder Value" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/in/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/in/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/in/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/in/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/in/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/07" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/08" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/09" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/10" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/11" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/12" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/13" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/14" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/15" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/16" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/17" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S2/out/18" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        //! S3
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/in/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/in/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/in/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/in/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/in/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/in/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/in/07" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/in/08" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/out/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/out/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/out/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/out/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/out/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/out/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/out/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/out/07" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/out/08" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S3/out/09" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        //! S4
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/in/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/in/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/in/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/in/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/in/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/in/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/in/07" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/in/08" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/in/09" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/07" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/08" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/09" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/10" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/11" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/12" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/13" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/14" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/15" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/16" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/17" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/18" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/19" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/20" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/21" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/22" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S4/out/23" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        //! S5
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S5/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S5/in/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S5/in/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S5/in/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S5/in/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S5/out/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S5/out/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        //! S6
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S6/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S6/in/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S6/in/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S6/in/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S6/in/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S6/in/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S6/in/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S6/out/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S6/out/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S6/out/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S6/out/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S6/out/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S6/out/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S6/out/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S6/out/07" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S6/out/08" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        //! S7
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S7/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S7/in/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S7/in/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S7/in/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S7/in/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S7/in/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S7/in/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S7/out/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S7/out/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S7/out/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S7/out/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S7/out/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S7/out/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S7/out/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
 
 
-        //! S8
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S8_MAXIMUM_HEIGHT_VALUE_TR1" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S8_MINIMUN_HEIGHT_VALUE_TR1" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S8_OFF_SET_TR1" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S8_CURRENT_HEIGHT_TR1" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S8_TOTAL_HEIGHT_TR1" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S8_MAXIMUM_HEIGHT_VALUE_TR3" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S8_MINIMUN_HEIGHT_VALUE_TR3" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S8_OFF_SET_TR3" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S8_CURRENT_HEIGHT_TR3" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S8_TOTAL_HEIGHT_TR3" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        //! S9
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S9_MAXIMUM_HEIGHT_VALUE_TR2" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S9_MINIMUN_HEIGHT_VALUE_TR2" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S9_OFF_SET_TR2" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S9_CURRENT_HEIGHT_TR2" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S9_TOTAL_HEIGHT_TR2" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S9_MAXIMUM_HEIGHT_VALUE_TR4" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S9_MINIMUN_HEIGHT_VALUE_TR4" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S9_OFF_SET_TR4" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S9_CURRENT_HEIGHT_TR4" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S9_TOTAL_HEIGHT_TR4" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        //! S10
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/in/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/in/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/in/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/in/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/in/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/in/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/in/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/in/07" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/out/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/out/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/out/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/out/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/out/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/out/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/out/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/out/07" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/out/08" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/out/09" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/out/10" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S10/out/11" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        //! S11
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S11/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S11/out/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S11/out/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S11/out/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S11/out/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S11/out/04" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S11/out/05" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S11/out/06" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S11/out/07" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S11/out/08" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S11/out/09" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        //! S12
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S12/in/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S12/in/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S12/in/02" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S12/in/03" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S12/out/00" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        client.Subscribe(new string[] { "HCM/IE-F2-HCA01/Metric/S12/out/01" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-*/
     }
     public void Publish_Message()
     {
@@ -371,81 +188,111 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
         //! S1
         else if (valueKey.Contains("S1/in/"))
         {
+            // int index = int.Parse(valueKey.Remove(0, 6));
+            // GlobalVariable.inputStation1[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
             int index = int.Parse(valueKey.Remove(0, 6));
-            GlobalVariable.inputStation1[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            inputCheckS1[index].SetActive(value);
+            if (index != 0 && index != 1) S1SensorCheck[index - 2].SetActive(value);
 
         }
         else if (valueKey.Contains("S1/out/"))
         {
             int index = int.Parse(valueKey.Remove(0, 7));
-            GlobalVariable.outputStation1[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            outputCheckS1[index].SetActive(value);
+            if (index == 12) GlobalVariable.outputStation1[12] = value;
         }
         //! S2
         else if (valueKey.Contains("S2/in/"))
         {
             int index = int.Parse(valueKey.Remove(0, 6));
-            GlobalVariable.inputStation2[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            inputCheckS2[index].SetActive(value);
+            if (index != 0 && index != 2) S2SensorCheck[index - 2].SetActive(value);
 
         }
         else if (valueKey.Contains("S2/out/"))
         {
             int index = int.Parse(valueKey.Remove(0, 7));
-            GlobalVariable.outputStation2[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            outputCheckS2[index].SetActive(value);
         }
         //! S3
         else if (valueKey.Contains("S3/in/"))
         {
             int index = int.Parse(valueKey.Remove(0, 6));
-            GlobalVariable.inputStation3[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            inputCheckS3[index].SetActive(value);
+            if (index > 0 && index < 5)
+            {
+                if (value) S3SensorCheck[index - 1].SetActive(value);
+            }
+
+
         }
         else if (valueKey.Contains("S3/out/"))
         {
             int index = int.Parse(valueKey.Remove(0, 7));
-            GlobalVariable.outputStation3[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            outputCheckS3[index].SetActive(value);
         }
         //! S4
         else if (valueKey.Contains("S4/in/"))
         {
             int index = int.Parse(valueKey.Remove(0, 6));
-            GlobalVariable.inputStation4[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            inputCheckS4[index].SetActive(value);
+            if (index != 0 && index != 1) S4SensorCheck[index - 2].SetActive(value);
         }
         else if (valueKey.Contains("S4/out/"))
         {
             int index = int.Parse(valueKey.Remove(0, 7));
-            GlobalVariable.outputStation4[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            outputCheckS4[index].SetActive(value);
         }
         //! S5
         else if (valueKey.Contains("S5/in/"))
         {
             int index = int.Parse(valueKey.Remove(0, 6));
-            GlobalVariable.inputStation5[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            inputCheckS5[index].SetActive(value);
+            if (index > 0)
+            { if (value) S5SensorCheck[index - 1].SetActive(value); }
+
         }
         else if (valueKey.Contains("S5/out/"))
         {
             int index = int.Parse(valueKey.Remove(0, 7));
-            GlobalVariable.outputStation5[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            outputCheckS5[index].SetActive(value);
         }
         //! S6
         else if (valueKey.Contains("S6/in/"))
         {
             int index = int.Parse(valueKey.Remove(0, 6));
-            GlobalVariable.inputStation6[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            inputCheckS6[index].SetActive(value);
         }
         else if (valueKey.Contains("S6/out/"))
         {
             int index = int.Parse(valueKey.Remove(0, 7));
-            GlobalVariable.outputStation6[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            outputCheckS6[index].SetActive(value);
         }
         //! S7
         else if (valueKey.Contains("S7/in/"))
         {
             int index = int.Parse(valueKey.Remove(0, 6));
-            GlobalVariable.inputStation7[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            inputCheckS7[index].SetActive(value);
         }
         else if (valueKey.Contains("S7/out/"))
         {
             int index = int.Parse(valueKey.Remove(0, 7));
-            GlobalVariable.outputStation7[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            outputCheckS7[index].SetActive(value);
+
         }
 
         //! S8 
@@ -564,34 +411,43 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
         else if (valueKey.Contains("S10/in/"))
         {
             int index = int.Parse(valueKey.Remove(0, 7));
-            GlobalVariable.inputStation10[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            inputCheckS10[index].SetActive(value);
+            if (index > 1 && index < 6)
+            { if (value) S10SensorCheck[index - 2].SetActive(value); }
         }
         else if (valueKey.Contains("S10/out/"))
         {
             int index = int.Parse(valueKey.Remove(0, 8));
-            GlobalVariable.outputStation10[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            outputCheckS10[index].SetActive(value);
         }
         //! S11
         else if (valueKey.Contains("S11/in/"))
         {
             int index = int.Parse(valueKey.Remove(0, 7));
-            GlobalVariable.inputStation11[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            inputCheckS11[index].SetActive(value);
         }
         else if (valueKey.Contains("S11/out/"))
         {
             int index = int.Parse(valueKey.Remove(0, 8));
-            GlobalVariable.outputStation11[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            outputCheckS11[index].SetActive(value);
         }
         //! S12
         else if (valueKey.Contains("S12/in/"))
         {
             int index = int.Parse(valueKey.Remove(0, 7));
-            GlobalVariable.inputStation12[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            inputCheckS12[index].SetActive(value);
+            S12SensorCheck[index].SetActive(value);
         }
         else if (valueKey.Contains("S12/out/"))
         {
             int index = int.Parse(valueKey.Remove(0, 8));
-            GlobalVariable.outputStation12[index] = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
+            outputCheckS12[index].SetActive(value);
         }
         else if (valueKey.Contains("GOOD_CNT_TR"))
         {
