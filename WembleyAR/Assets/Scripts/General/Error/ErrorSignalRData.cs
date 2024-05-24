@@ -18,12 +18,12 @@ public class ErrorSignalRData : MonoBehaviour
     void OnEnable()
     {
         GlobalVariable.subscribedTopics = errorTopics;
-        signalR.UpdateTopics(errorTopics);
+        //  signalR.UpdateTopics(errorTopics);
     }
 
     void OnDisable()
     {
         GlobalVariable.subscribedTopics = new List<string>();
-        signalR.UpdateTopics(new List<string>());
+        //  signalR.UpdateTopics(new List<string>());
     }
 }

@@ -47,12 +47,14 @@ public class MQTT_Data_Station_1 : MonoBehaviour
     }
     void OnEnable()
     {
+        mqtt.Publish_Message(1);
         mqtt.SubscribeTopic(topicStation1);
     }
 
     void OnDisable()
     {
         mqtt.UnsubscribeTopic(topicStation1);
+        mqtt.Publish_Message(0);
     }
 }
 

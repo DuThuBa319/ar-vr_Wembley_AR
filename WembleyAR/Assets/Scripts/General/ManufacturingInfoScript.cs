@@ -18,7 +18,7 @@ public class ManufacturingInfoScript : MonoBehaviour
 
     void Start()
     {
-        loadingAnimator.SetActive(false);
+        //loadingAnimator.SetActive(false);
 
     }
     //? The error you're seeing is because void cannot be awaited. The async keyword enables the await keyword in that method. When you await a method, it must return a Task or Task<T>.

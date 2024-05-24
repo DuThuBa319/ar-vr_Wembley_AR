@@ -6,7 +6,7 @@ public class MQTT_Data_Station_5 : MonoBehaviour
 {
     MQTT mqtt;
     List<string> topicStation5 = new List<string> {
-         $"{GlobalVariable.basedTopic}/Encoder Value" ,
+        // $"{GlobalVariable.basedTopic}/Encoder Value" ,
  $"{GlobalVariable.basedTopic}/S5/in/00" ,
          $"{GlobalVariable.basedTopic}/S5/in/01" ,
          $"{GlobalVariable.basedTopic}/S5/in/02" ,
@@ -20,12 +20,15 @@ public class MQTT_Data_Station_5 : MonoBehaviour
     }
     void OnEnable()
     {
+        mqtt.Publish_Message(5);
         mqtt.SubscribeTopic(topicStation5);
     }
 
     void OnDisable()
     {
+
         mqtt.UnsubscribeTopic(topicStation5);
+        mqtt.Publish_Message(0);
     }
 }
 

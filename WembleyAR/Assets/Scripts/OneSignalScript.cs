@@ -13,8 +13,4 @@ public class OneSignalScript : MonoBehaviour
         OneSignal.Login("IE-F2-HCA01");
 
     }
-
-
-
-
 }

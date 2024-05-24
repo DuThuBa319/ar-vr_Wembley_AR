@@ -53,7 +53,7 @@ public class OpenMonitor : MonoBehaviour
         if (disableCamera)
         {
             ARCamera.GetComponent<VuforiaBehaviour>().enabled = false;
-            GlobalVariable.isCameraEnabled = false;
+
         }
         ApplicationChrome.statusBarState = ApplicationChrome.States.Visible;
 
@@ -63,7 +63,7 @@ public class OpenMonitor : MonoBehaviour
         ApplicationChrome.statusBarState = ApplicationChrome.States.Hidden;
         ApplicationChrome.navigationBarState = ApplicationChrome.States.Hidden;
         ARCamera.GetComponent<VuforiaBehaviour>().enabled = true;
-        GlobalVariable.isCameraEnabled = true;
+
         targetMonitor.SetActive(false);
         menu.SetActive(true);
     }

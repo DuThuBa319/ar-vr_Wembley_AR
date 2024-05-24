@@ -6,16 +6,19 @@ using Vuforia;
 public class OpenStationCanvas : MonoBehaviour
 {
     public GameObject targetCanvas, clickBtn;
+    public bool haveSensorTag;
     public GameObject homeScreen;
     public string tagName;
     public GameObject monitorCanvas;
     public Camera ARCamera;
+
     // Start is called before the first frame update
     void Start()
     {
         targetCanvas.SetActive(false);
         homeScreen.SetActive(true);
         clickBtn.SetActive(true);
+        // if (haveSensorTag) sensorTag.SetActive(true);
 
     }
     void Update()
@@ -38,15 +41,17 @@ public class OpenStationCanvas : MonoBehaviour
         targetCanvas.SetActive(true);
         clickBtn.SetActive(false);
         monitorCanvas.SetActive(false);
+        //if (haveSensorTag) sensorTag.SetActive(false);
         ARCamera.GetComponent<VuforiaBehaviour>().enabled = false;
-        GlobalVariable.isCameraEnabled = false;
+
     }
     public void onCloseCanvas()
     {
         targetCanvas.SetActive(false);
         clickBtn.SetActive(true);
         monitorCanvas.SetActive(true);
+        // if (haveSensorTag) sensorTag.SetActive(true);
         ARCamera.GetComponent<VuforiaBehaviour>().enabled = true;
-        GlobalVariable.isCameraEnabled = true;
+
     }
 }

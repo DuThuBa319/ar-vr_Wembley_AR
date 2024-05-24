@@ -79,6 +79,7 @@ public class SignalRData : MonoBehaviour
                 UpdateTopics(GlobalVariable.subscribedTopics);
                 GlobalVariable.isConnecting = false;
                 GlobalVariable.serverConnected = true;
+                GlobalVariable.hubConnection.InvokeAsync("SendAll");
             }
         });
         GlobalVariable.isConnecting = true;
@@ -96,7 +97,8 @@ public class SignalRData : MonoBehaviour
                 {
                     GlobalVariable.isConnecting = false;
                     GlobalVariable.serverConnected = true;
-                    UpdateTopics(GlobalVariable.initialTopic);
+                    GlobalVariable.subscribedTopics = GlobalVariable.initialTopic;
+                    UpdateTopics(GlobalVariable.subscribedTopics);
                 }
 
             });
@@ -132,20 +134,20 @@ public class SignalRData : MonoBehaviour
 
     void Update()
     {
-        if (isReset && GlobalVariable.encoderPosition > 0 && GlobalVariable.encoderPosition < 100)
-        {
-            isReset = false;
-        }
-        if (!isReset && GlobalVariable.encoderPosition > 150 && GlobalVariable.encoderPosition < 250)
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                S10SensorCheck[i + 2].SetActive(false);
-                S5SensorCheck[i + 1].SetActive(false);
-                S3SensorCheck[i + 1].SetActive(false);
-            }
-            isReset = true;
-        }
+        // if (isReset && GlobalVariable.encoderPosition > 0 && GlobalVariable.encoderPosition < 100)
+        // {
+        //     isReset = false;
+        // }
+        // if (!isReset && GlobalVariable.encoderPosition > 150 && GlobalVariable.encoderPosition < 250)
+        // {
+        //     for (int i = 0; i < 4; i++)
+        //     {
+        //         S10SensorCheck[i].SetActive(false);
+        //         S5SensorCheck[i].SetActive(false);
+        //         S3SensorCheck[i].SetActive(false);
+        //     }
+        //     isReset = true;
+        // }
     }
     public void UpdateTopics(List<string> topics)
     {
@@ -490,6 +492,7 @@ public class SignalRData : MonoBehaviour
                         GlobalVariable.operationTime = data.TagValue;
                         break;
                     case "errorStatus":
+                        Debug.Log(data.TagValue);
                         errorInfor = new ErrorInfor { errorName = data.TagValue, time = data.TimeStamp.ToString("HH:mm:ss dd/MM/yyyy") };
                         GlobalVariable.errorInfors.Add(errorInfor);
                         alarmScript.gameObject.GetComponent<ErrorListView>().GenerateListView(GlobalVariable.errorInfors);
