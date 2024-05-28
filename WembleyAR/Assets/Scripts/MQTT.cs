@@ -110,7 +110,7 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
     protected override void Awake()
     {
         base.Awake();
-        brokerAddress = "40.82.154.13";
+        brokerAddress = "52.141.29.70";
         //  autoConnect = true;
         Connect();
     }
@@ -688,13 +688,7 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
             int index = int.Parse(valueKey.Remove(0, 7));
             bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
             inputCheckS10[index].SetActive(value);
-            // if (GlobalVariable.encoderPosition > 700 && GlobalVariable.encoderPosition < 750)
-            // {
-            //     if (inputCheckS10[2]) S10SensorCheck[0].SetActive(true);
-            //     if (inputCheckS10[3]) S10SensorCheck[1].SetActive(true);
-            //     if (inputCheckS10[4]) S10SensorCheck[2].SetActive(true);
-            //     if (inputCheckS10[5]) S10SensorCheck[3].SetActive(true);
-            // }
+
 
         }
         else if (valueKey.Contains("S10/out/"))
@@ -702,57 +696,8 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
             int index = int.Parse(valueKey.Remove(0, 8));
             bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
             outputCheckS10[index].SetActive(value);
-            S10_AirBlow_On[index].SetActive(value);
-            // if (index == 4 && value)
-            // {
-            //     S10_Holding_Fwd[0].SetActive(true);
-            // }
-            // else if (index == 5 && value)
-            // {
-            //     S10_Holding_Fwd[0].SetActive(false);
-            // }
-            // else if (index == 6 && value)
-            // {
-            //     S10_Holding_Fwd[1].SetActive(true);
-            // }
-            // else if (index == 7 && value)
-            // {
-            //     S10_Holding_Fwd[1].SetActive(false);
-            // }
-            // else if (index == 8 && value)
-            // {
-            //     S10_Holding_Fwd[2].SetActive(true);
-            // }
-            // else if (index == 9 && value)
-            // {
-            //     S10_Holding_Fwd[2].SetActive(false);
-            // }
-            // else if (index == 10 && value)
-            // {
-            //     S10_Holding_Fwd[3].SetActive(true);
-            // }
-            // else if (index == 11 && value)
-            // {
-            //     S10_Holding_Fwd[3].SetActive(false);
-            // }
-            // if (index == 0 && value)
-            // {
-            //     S10_AirBlow_On[0].SetActive(value);
-            // }
+            if (index < 4) S10_AirBlow_On[index].SetActive(value);
 
-            // else if (index == 1)
-            // {
-            //     S10_AirBlow_On[1].SetActive(value);
-            // }
-
-            // else if (index == 2)
-            // {
-            //     S10_AirBlow_On[2].SetActive(value);
-            // }
-            // else if (index == 3)
-            // {
-            //     S10_AirBlow_On[3].SetActive(value);
-            // }
 
         }
         else if (valueKey.Contains("CHECK_PRESSURE_S10_TRACK"))
@@ -763,7 +708,7 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
 
 
         }
-        //! S11
+        //!- S11
         else if (valueKey.Contains("S11/in/"))
         {
             int index = int.Parse(valueKey.Remove(0, 7));

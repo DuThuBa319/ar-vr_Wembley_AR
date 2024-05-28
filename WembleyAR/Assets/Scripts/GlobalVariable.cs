@@ -14,7 +14,7 @@ public class GlobalVariable : MonoBehaviour
          $"{basedTopic}/errorStatus" ,
           $"{basedTopic}/endErrorStatus" ,
           };
-    public static List<string> subscribedTopics = new List<string>();
+    public static List<string> subscribedTopics = initialTopic;
     public static bool networkConnected = false;
     public static bool serverConnected = false;
     public static bool isConnecting = false;
