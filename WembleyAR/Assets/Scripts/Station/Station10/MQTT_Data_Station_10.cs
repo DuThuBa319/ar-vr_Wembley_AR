@@ -7,7 +7,7 @@ public class MQTT_Data_Station_10 : MonoBehaviour
     MQTT mqtt;
 
     List<string> topicStation10 = new List<string> {
-      //$"{GlobalVariable.basedTopic}/Encoder Value" ,
+      //  ,
         $"{GlobalVariable.basedTopic}/S10/in/00" ,
          $"{GlobalVariable.basedTopic}/S10/in/01" ,
          $"{GlobalVariable.basedTopic}/S10/in/02" ,

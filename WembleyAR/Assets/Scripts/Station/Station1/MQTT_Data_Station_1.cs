@@ -5,9 +5,7 @@ using UnityEngine;
 public class MQTT_Data_Station_1 : MonoBehaviour
 {
     MQTT mqtt;
-    List<string> topicStation1 = new List<string> {
-
-         $"{GlobalVariable.basedTopic}/Encoder Value" ,
+    List<string> topicStation1 = new List<string>  {
          $"{GlobalVariable.basedTopic}/S1/in/00" ,
          $"{GlobalVariable.basedTopic}/S1/in/01" ,
          $"{GlobalVariable.basedTopic}/S1/in/02" ,

@@ -7,8 +7,9 @@ public class SignalR_Data_Station_12 : MonoBehaviour
     SignalRData signalR;
     List<string> topicStation12 = new List<string> {
 
-         $"{GlobalVariable.basedTopic}/Encoder Value" ,
-         $"{GlobalVariable.basedTopic}/S12/" ,
+
+         $"{GlobalVariable.basedTopic}/S11/" ,
+         $"{GlobalVariable.basedTopic}/S12/"
           };
     void Awake()
     {
@@ -19,11 +20,13 @@ public class SignalR_Data_Station_12 : MonoBehaviour
         GlobalVariable.subscribedTopics = GlobalVariable.initialTopic;
         GlobalVariable.subscribedTopics.AddRange(topicStation12);
         signalR.UpdateTopics(GlobalVariable.subscribedTopics);
+        signalR.PublishStationIndex(12);
     }
 
     void OnDisable()
     {
         GlobalVariable.subscribedTopics = GlobalVariable.initialTopic;
         signalR.UpdateTopics(GlobalVariable.subscribedTopics);
+        signalR.PublishStationIndex(0);
     }
 }

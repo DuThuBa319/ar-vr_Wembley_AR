@@ -6,7 +6,7 @@ public class SignalR_Data_Station_9 : MonoBehaviour
 {
     SignalRData signalR;
     List<string> topicStation9 = new List<string> {
-         $"{GlobalVariable.basedTopic}/Encoder Value",
+
          $"{GlobalVariable.basedTopic}/S9_MAXIMUM_HEIGHT_VALUE_TR2" ,
          $"{GlobalVariable.basedTopic}/S9_MINIMUN_HEIGHT_VALUE_TR2" ,
          $"{GlobalVariable.basedTopic}/S9_OFF_SET_TR2" ,

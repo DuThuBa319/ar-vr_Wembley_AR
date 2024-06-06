@@ -111,7 +111,7 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
     {
         base.Awake();
         brokerAddress = "52.141.29.70";
-        //  autoConnect = true;
+        autoConnect = true;
         Connect();
     }
     protected override void Start()
@@ -134,21 +134,7 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
     protected override void Update()
     {
         base.Update();
-        if (isReset && GlobalVariable.encoderPosition > 890 && GlobalVariable.encoderPosition < 990)
-        {
-            isReset = false;
-        }
-        if (!isReset && GlobalVariable.encoderPosition > 000 && GlobalVariable.encoderPosition < 100)
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                //S1SensorCheck[i].SetActive(false);
-                // S10SensorCheck[i].SetActive(false);
-                S5SensorCheck_1[i].SetActive(false);
-                S3SensorCheck_1[i].SetActive(false);
-            }
-            isReset = true;
-        }
+
     }
     public void SubscribeTopic(List<string> topics)
     {
@@ -211,8 +197,8 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
                         } 
                     }
                 }  */
-
-        string valueKey = topic.Remove(0, 31);
+        //! đổi based topic thì đổi số ở đây
+        string valueKey = topic.Remove(0, 23);
         // string msg = System.Text.Encoding.UTF8.GetString(message);
 
         msg = msg.TrimStart("[").TrimEnd("]");
@@ -379,7 +365,6 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
             int index = int.Parse(valueKey.Remove(0, 6));
             bool value = Data.CreateFromJSON(msg).value == "1" ? true : false;
             inputCheckS3[index].SetActive(value);
-
             if (index > 0 && index < 5)
             {
                 S3SensorCheck_1[index - 1].SetActive(value);
@@ -868,11 +853,6 @@ public class MQTT : M2MqttUnity.M2MqttUnityClient
                 case "operationTimeRaw":
                     GlobalVariable.operationTime = Data.CreateFromJSON(msg).value;
                     break;
-                // case "errorStatus":
-                //     ErrorInfor errorInfor = new ErrorInfor { errorName = Data.CreateFromJSON(msg).value, time = data.TimeStamp.ToString("HH:mm:ss dd/MM/yyyy") };
-                //     GlobalVariable.errorInfors.Add(errorInfor);
-                //     alarmScript.gameObject.GetComponent<ErrorListView>().GenerateListView(GlobalVariable.errorInfors);
-                //     break;
                 default:
                     break;
             }

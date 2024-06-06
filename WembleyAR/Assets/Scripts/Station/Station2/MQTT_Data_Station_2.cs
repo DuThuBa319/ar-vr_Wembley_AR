@@ -6,7 +6,6 @@ public class MQTT_Data_Station_2 : MonoBehaviour
 {
     MQTT mqtt;
     List<string> topicStation2 = new List<string> {
- $"{GlobalVariable.basedTopic}/Encoder Value" ,
          $"{GlobalVariable.basedTopic}/S2/in/00" ,
          $"{GlobalVariable.basedTopic}/S2/in/01" ,
          $"{GlobalVariable.basedTopic}/S2/in/02" ,

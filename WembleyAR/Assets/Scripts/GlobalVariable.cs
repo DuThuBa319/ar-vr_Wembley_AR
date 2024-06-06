@@ -9,10 +9,11 @@ public class GlobalVariable : MonoBehaviour
 {
     public static HubConnection hubConnection;
     public static string url = "https://wembleyscada.azurewebsites.net/NotificationHub";
-    public static string basedTopic = "Wembley/HerapinCap/IE-F2-HCA01";
+    //public static string basedTopic = "Wembley/HerapinCap/IE-F2-HCA01";
+    public static string basedTopic = "HCM/IE-F2-HCA01/Metric";
     public static List<string> initialTopic = new List<string> {
-         $"{basedTopic}/errorStatus" ,
-          $"{basedTopic}/endErrorStatus" ,
+        $"{basedTopic}/errorStatus" ,
+        $"{basedTopic}/endErrorStatus" ,
           };
     public static List<string> subscribedTopics = initialTopic;
     public static bool networkConnected = false;
@@ -112,15 +113,15 @@ public class DataSignalR
     public string TagValue;
     public DateTime TimeStamp;
 }
-[System.Serializable]
-public class DoubleTypeDataModel
-{
-    public string StationId;
-    public string LineId;
-    public string TagId;
-    public double TagValue;
-    public string TimeStamp;
-}
+// [System.Serializable]
+// public class DoubleTypeDataModel
+// {
+//     public string StationId;
+//     public string LineId;
+//     public string TagId;
+//     public double TagValue;
+//     public string TimeStamp;
+// }
 
 
 [System.Serializable]

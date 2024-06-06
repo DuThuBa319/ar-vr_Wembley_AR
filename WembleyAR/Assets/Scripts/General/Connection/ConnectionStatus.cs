@@ -57,6 +57,7 @@ public class ConnectionStatus : MonoBehaviour
                 if (task.IsFaulted)
                 {
                     Debug.Log("There was an error opening the connection:" + task.Exception.GetBaseException());
+                    GlobalVariable.isConnecting = false;
                     GlobalVariable.errorServerConnected = true;
                 }
                 if (task.IsCompletedSuccessfully)

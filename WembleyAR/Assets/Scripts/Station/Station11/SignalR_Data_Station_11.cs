@@ -5,9 +5,7 @@ using UnityEngine;
 public class SignalR_Data_Station_11 : MonoBehaviour
 {
     SignalRData signalR;
-    List<string> topicStation11 = new List<string> {
-
-         $"{GlobalVariable.basedTopic}/Encoder Value" ,
+    List<string> topicStation11 = new List<string>  {
          $"{GlobalVariable.basedTopic}/S11/" ,
           };
     void Awake()
