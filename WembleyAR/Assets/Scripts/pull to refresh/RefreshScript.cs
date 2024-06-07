@@ -20,7 +20,6 @@ public class RefreshScript : MonoBehaviour
     public void OnScroll(Vector2 value)
     {
         distance = initialPosY - content.GetComponent<RectTransform>().anchoredPosition.y;
-
         if (!isPulled && distance < 300f)
         {
             return;
@@ -28,7 +27,6 @@ public class RefreshScript : MonoBehaviour
         else
         {
             isPulled = true;
-
         }
         if (isPulled && distance < 100)
         {
@@ -36,7 +34,5 @@ public class RefreshScript : MonoBehaviour
             //! đừng thêm async/await
             manufacturingInfoScript.UpdateManufacturingInforData();
         }
-
-
     }
 }

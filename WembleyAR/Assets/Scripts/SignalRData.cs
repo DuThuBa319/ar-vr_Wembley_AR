@@ -96,7 +96,7 @@ public class SignalRData : MonoBehaviour
             GlobalVariable.hubConnection = new HubConnectionBuilder().WithUrl(GlobalVariable.url)
             // .WithAutomaticReconnect()
             .Build();
-            GlobalVariable.isConnecting = true;
+
         }
 
 
@@ -129,7 +129,7 @@ public class SignalRData : MonoBehaviour
                 await alarmScript.gameObject.GetComponent<ErrorListView>().GenerateListView(GlobalVariable.errorInfors);
             }
         });
-
+        GlobalVariable.isConnecting = true;
         try
         {
             await GlobalVariable.hubConnection.StartAsync().ContinueWith(task =>
@@ -142,10 +142,7 @@ public class SignalRData : MonoBehaviour
                 }
                 if (task.IsCompletedSuccessfully)
                 {
-                    // GlobalVariable.isConnecting = false;
-                    // GlobalVariable.serverConnected = true;
-                    // GlobalVariable.subscribedTopics = GlobalVariable.initialTopic;
-                    // UpdateTopics(GlobalVariable.subscribedTopics);
+                    //? không cần thiết
                 }
 
             });
@@ -985,15 +982,6 @@ public class SignalRData : MonoBehaviour
                     case "endErrorStatus":
                         //linQ
                         GlobalVariable.errorInfors.RemoveAll(x => x.errorName == data.TagValue);
-                        // errorInfor = new ErrorInfor { errorName = data.TagValue, time = data.TimeStamp.ToString("HH:mm:ss dd/MM/yyyy") };
-                        // for (int i = 0; i < GlobalVariable.errorInfors.Count; i++)
-                        // {
-                        //     if (GlobalVariable.errorInfors[i].errorName == errorInfor.errorName)
-                        //     {
-                        //         GlobalVariable.errorInfors.RemoveAt(i);
-                        //         break;
-                        //     }
-                        // }
                         alarmScript.gameObject.GetComponent<ErrorListView>().GenerateListView(GlobalVariable.errorInfors);
                         break;
                     default:
